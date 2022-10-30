@@ -18,6 +18,12 @@ class Login extends StatelessWidget {
           ),
         ),
       ),
+      body: Container(
+        height: 250.0,
+        child: Center(
+          child: Image.asset('assets/Exchange-logo.png'),
+        ),
+      ),
     );
   }
 }
