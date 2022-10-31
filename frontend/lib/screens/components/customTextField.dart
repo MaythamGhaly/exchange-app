@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20.0),
+      margin: const EdgeInsets.only(right: 20, left: 20, top: 20.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         // ignore: prefer_const_literals_to_create_immutables

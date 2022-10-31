@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String inputText;
+  final Function callbackFunction;
 
-  const CustomButton({required this.inputText});
+  const CustomButton(
+      {Key? key, required this.inputText, required this.callbackFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 20.0),
       height: 50,
       width: 130,
       decoration: BoxDecoration(
@@ -27,7 +31,9 @@ class CustomButton extends StatelessWidget {
         ],
       ),
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          callbackFunction("hello");
+        },
         child: Text(
           inputText,
           style: const TextStyle(
