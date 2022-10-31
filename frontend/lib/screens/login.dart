@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 200.0,
+              height: 150.0,
               child: Center(
                 child: DropShadowImage(
                   offset: const Offset(5, 5),
@@ -125,6 +125,35 @@ class _LoginState extends State<Login> {
                       borderSide: const BorderSide(
                           width: 1, color: Color.fromARGB(200, 92, 225, 230)),
                     )),
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                'Forgot Password?',
+                style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
+              ),
+            ),
+            SizedBox(
+                height: 50,
+                width: 130,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(200, 92, 225, 230),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      )),
+                  child: const Text('Log In',
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  onPressed: () {},
+                )),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                "Don't have an account? Sign Up",
+                style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
               ),
             ),
           ],
