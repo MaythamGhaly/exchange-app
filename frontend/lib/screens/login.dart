@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
+import 'package:frontend/screens/register.dart';
+import 'components/customButton.dart';
+import 'components/customTextField.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +12,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  hello(x) {
+    print(x);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,76 +63,14 @@ class _LoginState extends State<Login> {
                     ),
                   ]),
             ),
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                // ignore: prefer_const_literals_to_create_immutables
-                boxShadow: [
-                  const BoxShadow(
-                    color: Color.fromARGB(200, 92, 225, 230),
-                    blurRadius: 15,
-                    offset: Offset(-2, 4),
-                  ),
-                ],
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-                    ),
-                    filled: true,
-                    fillColor: const Color.fromARGB(255, 238, 238, 238),
-                    labelText: 'Email',
-                    hintText: 'example@example.com',
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
-                    ),
-                    labelStyle: const TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-                    )),
-              ),
+            const CustomTextField(
+              labelText: 'Email',
+              hintText: 'Enter your email',
             ),
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                // ignore: prefer_const_literals_to_create_immutables
-                boxShadow: [
-                  const BoxShadow(
-                    color: Color.fromARGB(200, 92, 225, 230),
-                    blurRadius: 15,
-                    offset: Offset(-2, 4),
-                  ),
-                ],
-              ),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-                    ),
-                    filled: true,
-                    fillColor: const Color.fromARGB(255, 238, 238, 238),
-                    labelText: 'Password',
-                    labelStyle: const TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: const BorderSide(
-                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-                    )),
-              ),
+            const CustomTextField(
+              labelText: 'Password',
+              hintText: 'Enter your password',
+              isPassword: true,
             ),
             TextButton(
               onPressed: () {},
@@ -134,23 +79,17 @@ class _LoginState extends State<Login> {
                 style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
               ),
             ),
-            SizedBox(
-                height: 50,
-                width: 130,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(200, 92, 225, 230),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      )),
-                  child: const Text('Log In',
-                      style: TextStyle(
-                        color: Colors.white,
-                      )),
-                  onPressed: () {},
-                )),
+            CustomButton(
+              inputText: 'Login',
+              callbackFunction: hello,
+            ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Register()),
+                );
+              },
               child: const Text(
                 "Don't have an account? Sign Up",
                 style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
