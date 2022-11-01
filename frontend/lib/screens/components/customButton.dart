@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: MaterialButton(
         onPressed: () {
-          onpressed("hello");
+          onpressed();
         },
         child: Text(
           inputText,

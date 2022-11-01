@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
+import 'package:frontend/screens/homePage.dart';
 import 'package:frontend/screens/register.dart';
 import 'components/customButton.dart';
 import 'components/customTextField.dart';
@@ -14,11 +15,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
-
-  hello() {
-    print(_email.text);
-    print(_password.text);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +149,12 @@ class _LoginState extends State<Login> {
             ),
             CustomButton(
               inputText: 'Login',
-              onpressed: hello,
+              onpressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Home()),
+                );
+              },
             ),
             TextButton(
               onPressed: () {

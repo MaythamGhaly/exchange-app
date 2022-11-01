@@ -3,6 +3,7 @@ import 'package:drop_shadow_image/drop_shadow_image.dart';
 
 import 'components/customButton.dart';
 import 'components/customTextField.dart';
+import 'components/getUserLocation.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -272,9 +273,15 @@ class _RegisterState extends State<Register> {
                     )),
               ),
             ),
+            const LocationPage(),
             CustomButton(
               inputText: 'Register',
-              onpressed: hello,
+              onpressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Register()),
+                );
+              },
             ),
           ],
         ),
