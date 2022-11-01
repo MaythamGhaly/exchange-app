@@ -41,6 +41,7 @@ dependencies:
 
   geolocator: ^8.2.0
   geocoding: ^2.0.4   
+  carousel_pro: ^1.0.0
 
 dev_dependencies:
   flutter_test:
