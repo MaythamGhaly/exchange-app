@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String inputText;
-  final Function callbackFunction;
+  final Function onpressed;
 
   const CustomButton(
-      {Key? key, required this.inputText, required this.callbackFunction})
+      {Key? key, required this.inputText, required this.onpressed})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: MaterialButton(
         onPressed: () {
-          callbackFunction("hello");
+          onpressed("hello");
         },
         child: Text(
           inputText,

@@ -12,8 +12,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  hello(x) {
-    print(x);
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+
+  hello() {
+    print(_email.text);
+    print(_password.text);
   }
 
   @override
@@ -63,14 +67,82 @@ class _LoginState extends State<Login> {
                     ),
                   ]),
             ),
-            const CustomTextField(
-              labelText: 'Email',
-              hintText: 'Enter your email',
+            Container(
+              margin: const EdgeInsets.only(right: 20, left: 20, top: 20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                // ignore: prefer_const_literals_to_create_immutables
+                boxShadow: [
+                  const BoxShadow(
+                    color: Color.fromARGB(200, 92, 225, 230),
+                    blurRadius: 15,
+                    offset: Offset(-2, 4),
+                  ),
+                ],
+              ),
+              child: TextFormField(
+                controller: _email,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: const BorderSide(
+                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+                    ),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 238, 238, 238),
+                    labelText: "Email",
+                    hintText: "enter your email",
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(200, 92, 225, 230),
+                    ),
+                    labelStyle: const TextStyle(
+                      color: Color.fromARGB(200, 92, 225, 230),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: const BorderSide(
+                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+                    )),
+              ),
             ),
-            const CustomTextField(
-              labelText: 'Password',
-              hintText: 'Enter your password',
-              isPassword: true,
+            Container(
+              margin: const EdgeInsets.only(right: 20, left: 20, top: 20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                // ignore: prefer_const_literals_to_create_immutables
+                boxShadow: [
+                  const BoxShadow(
+                    color: Color.fromARGB(200, 92, 225, 230),
+                    blurRadius: 15,
+                    offset: Offset(-2, 4),
+                  ),
+                ],
+              ),
+              child: TextFormField(
+                controller: _password,
+                obscureText: true,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: const BorderSide(
+                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+                    ),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 238, 238, 238),
+                    labelText: "Password",
+                    hintText: "Enter your password",
+                    hintStyle: const TextStyle(
+                      color: Color.fromARGB(200, 92, 225, 230),
+                    ),
+                    labelStyle: const TextStyle(
+                      color: Color.fromARGB(200, 92, 225, 230),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: const BorderSide(
+                          width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+                    )),
+              ),
             ),
             TextButton(
               onPressed: () {},
@@ -81,7 +153,7 @@ class _LoginState extends State<Login> {
             ),
             CustomButton(
               inputText: 'Login',
-              callbackFunction: hello,
+              onpressed: hello,
             ),
             TextButton(
               onPressed: () {

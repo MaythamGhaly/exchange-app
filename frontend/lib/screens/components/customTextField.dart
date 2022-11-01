@@ -4,11 +4,19 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final bool isPassword;
+  final Function onchange;
 
-  const CustomTextField(
-      {required this.labelText,
+  CustomTextField(
+      {Key? key,
+      required this.labelText,
       required this.hintText,
-      this.isPassword = false});
+      this.isPassword = false,
+      required this.onchange})
+      : super(key: key);
+
+  void _updateText(String text) {
+    onchange(text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,10 @@ class CustomTextField extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
+        onChanged: (val) {
+          _updateText(val);
+        },
         obscureText: isPassword,
         decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
