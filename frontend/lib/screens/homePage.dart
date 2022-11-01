@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -242,24 +242,36 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            Center(
-              child: SizedBox(
-                height: 150.0,
-                width: 300.0,
-                child: Carousel(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  images: [
-                    const ExactAssetImage("../assets/1.jpg"),
-                    const ExactAssetImage("../assets/2.jpg"),
-                    const ExactAssetImage('../assets/3.jpg'),
-                  ],
-                  autoplay: false,
-                  animationDuration: const Duration(milliseconds: 1000),
-                  dotSize: 6.0,
-                  dotSpacing: 15.0,
-                  dotColor: Colors.lightGreenAccent,
-                  borderRadius: true,
-                ),
+            Container(
+              margin: const EdgeInsets.only(top: 25),
+              child: Center(
+                child: SizedBox(
+                    height: 150.0,
+                    width: 300.0,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                          height: 400.0,
+                          autoPlay: true,
+                          viewportFraction: 1,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800)),
+                      items: [
+                        Image.asset('assets/1.jpg'),
+                        Image.asset('assets/2.jpg'),
+                        Image.asset('assets/3.jpg')
+                      ].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: i);
+                          },
+                        );
+                      }).toList(),
+                    )),
               ),
             ),
           ],
