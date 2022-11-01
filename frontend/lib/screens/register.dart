@@ -114,15 +114,15 @@ class _RegisterState extends State<Register> {
               CustomButton(
                 inputText: 'Register',
                 onpressed: () {
-                  // if (_formKey.currentState!.validate()) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('yes')),
-                  //   );
-                  // } else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('no')),
-                  //   );
-                  // }
+                  if (_formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('yes')),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('no')),
+                    );
+                  }
                 },
               ),
             ],

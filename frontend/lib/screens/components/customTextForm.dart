@@ -7,7 +7,8 @@ class CustomTextForm {
       String hintText,
       TextEditingController textEditingController,
       bool confirmPassword,
-      TextEditingController password) {
+      TextEditingController password,
+      bool ispassword) {
     return Container(
       margin: const EdgeInsets.only(right: 20, left: 20, top: 20.0),
       decoration: BoxDecoration(
@@ -22,6 +23,7 @@ class CustomTextForm {
         ],
       ),
       child: TextFormField(
+          obscureText: ispassword,
           controller: textEditingController,
           decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
