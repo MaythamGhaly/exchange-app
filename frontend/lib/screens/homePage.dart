@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -213,7 +214,6 @@ class _HomeState extends State<Home> {
                   Row(
                     children: [
                       Flexible(
-                        flex: 1,
                         child: TextField(
                           cursorColor: Colors.grey,
                           decoration: InputDecoration(
@@ -241,7 +241,27 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-            )
+            ),
+            Center(
+              child: SizedBox(
+                height: 150.0,
+                width: 300.0,
+                child: Carousel(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  images: [
+                    const ExactAssetImage("../assets/1.jpg"),
+                    const ExactAssetImage("../assets/2.jpg"),
+                    const ExactAssetImage('../assets/3.jpg'),
+                  ],
+                  autoplay: false,
+                  animationDuration: const Duration(milliseconds: 1000),
+                  dotSize: 6.0,
+                  dotSpacing: 15.0,
+                  dotColor: Colors.lightGreenAccent,
+                  borderRadius: true,
+                ),
+              ),
+            ),
           ],
         ),
       ),
