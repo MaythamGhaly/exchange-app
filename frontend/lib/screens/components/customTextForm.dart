@@ -10,7 +10,7 @@ class CustomTextForm {
       TextEditingController password,
       bool ispassword) {
     return Container(
-      margin: const EdgeInsets.only(right: 20, left: 20, top: 20.0),
+      margin: const EdgeInsets.only(right: 20, left: 20, top: 15.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         // ignore: prefer_const_literals_to_create_immutables
@@ -18,7 +18,7 @@ class CustomTextForm {
           const BoxShadow(
             color: Color.fromARGB(200, 92, 225, 230),
             blurRadius: 15,
-            offset: Offset(-2, 4),
+            offset: Offset(0, 5),
           ),
         ],
       ),
@@ -32,14 +32,14 @@ class CustomTextForm {
                     width: 1, color: Color.fromARGB(200, 92, 225, 230)),
               ),
               filled: true,
-              fillColor: const Color.fromARGB(255, 238, 238, 238),
+              fillColor: Color.fromARGB(255, 228, 228, 228),
               labelText: labelText,
               hintText: hintText,
               hintStyle: const TextStyle(
-                color: Color.fromARGB(200, 92, 225, 230),
+                color: Color.fromARGB(123, 0, 0, 0),
               ),
               labelStyle: const TextStyle(
-                color: Color.fromARGB(200, 92, 225, 230),
+                color: Color.fromARGB(123, 0, 0, 0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),

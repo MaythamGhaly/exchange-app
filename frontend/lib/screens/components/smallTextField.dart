@@ -4,7 +4,7 @@ class SmallTextForm {
   static Widget customText(BuildContext context, String labelText,
       String hintText, TextEditingController textEditingController) {
     return Container(
-      margin: const EdgeInsets.only(left: 15, right: 20, top: 20),
+      margin: const EdgeInsets.only(left: 15, right: 20, top: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         // ignore: prefer_const_literals_to_create_immutables
@@ -12,7 +12,7 @@ class SmallTextForm {
           const BoxShadow(
             color: Color.fromARGB(200, 92, 225, 230),
             blurRadius: 15,
-            offset: Offset(-2, 4),
+            offset: Offset(0, 5),
           ),
         ],
       ),
@@ -25,14 +25,14 @@ class SmallTextForm {
                     width: 1, color: Color.fromARGB(200, 92, 225, 230)),
               ),
               filled: true,
-              fillColor: const Color.fromARGB(255, 238, 238, 238),
+              fillColor: const Color.fromARGB(255, 228, 228, 228),
               labelText: labelText,
               hintText: hintText,
               hintStyle: const TextStyle(
-                color: Color.fromARGB(200, 92, 225, 230),
+                color: Color.fromARGB(123, 0, 0, 0),
               ),
               labelStyle: const TextStyle(
-                color: Color.fromARGB(200, 92, 225, 230),
+                color: Color.fromARGB(123, 0, 0, 0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
