@@ -68,8 +68,8 @@ class _RegisterState extends State<Register> {
                     shadows: [
                       Shadow(
                         blurRadius: 10.0,
-                        color: Color.fromARGB(200, 122, 118, 128),
-                        offset: Offset(0, 4.0),
+                        color: Color.fromARGB(101, 122, 118, 128),
+                        offset: Offset(0, 10),
                       ),
                     ]),
               ),
@@ -111,6 +111,15 @@ class _RegisterState extends State<Register> {
                   true,
                   _passwordController,
                   true),
+              Container(
+                margin:
+                    const EdgeInsets.only(right: 30.0, left: 30.0, top: 10.0),
+                child: const Text(
+                  "By registring, you agree to our Terms of Service and Privacy Policy",
+                  style: TextStyle(
+                      color: Color.fromARGB(161, 44, 44, 44), fontSize: 12),
+                ),
+              ),
               CustomButton(
                 inputText: 'Register',
                 onpressed: () {
