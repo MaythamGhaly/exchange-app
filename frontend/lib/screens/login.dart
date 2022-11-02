@@ -18,30 +18,6 @@ class _LoginState extends State<Login> {
   TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,17 +53,29 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-
+              const Text(
+                'Login',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: Color.fromARGB(200, 92, 225, 230),
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Color.fromARGB(101, 122, 118, 128),
+                        offset: Offset(0, 10),
+                      ),
+                    ]),
+              ),
               CustomTextForm.customText(context, 'Email', 'enter your email',
                   _email, false, _password, false),
-              //   customText(context, "Email", "enter your email", _email, false),
               CustomTextForm.customText(context, "Password",
                   "enter your password", _password, false, _password, true),
               TextButton(
                 onPressed: () {},
                 child: const Text(
                   'Forgot Password?',
-                  style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
+                  style: TextStyle(color: Color.fromARGB(162, 36, 36, 36)),
                 ),
               ),
               CustomButton(
@@ -118,7 +106,7 @@ class _LoginState extends State<Login> {
                 },
                 child: const Text(
                   "Don't have an account? Sign Up",
-                  style: TextStyle(color: Color.fromARGB(200, 92, 225, 230)),
+                  style: TextStyle(color: Color.fromARGB(162, 36, 36, 36)),
                 ),
               ),
             ],
