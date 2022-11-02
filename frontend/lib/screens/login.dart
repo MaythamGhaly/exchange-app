@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/screens/components/customTextForm.dart';
-import 'package:frontend/screens/homePage.dart';
+import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/register.dart';
+import 'package:frontend/screens/basePage.dart';
 import 'components/customButton.dart';
 
 class Login extends StatefulWidget {
@@ -16,6 +17,30 @@ class _LoginState extends State<Login> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +95,8 @@ class _LoginState extends State<Login> {
                 onpressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Home()),
+                    MaterialPageRoute(
+                        builder: (context) => const MyStatefulWidget()),
                   );
                   // if (_formKey.currentState!.validate()) {
                   //   ScaffoldMessenger.of(context).showSnackBar(
