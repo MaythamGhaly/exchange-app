@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
+import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:frontend/screens/components/customTextForm.dart';
 import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/register.dart';
 import 'package:frontend/screens/basePage.dart';
+import 'package:provider/provider.dart';
 import 'components/customButton.dart';
+import '../shared_preferences/dark_theme_pref.dart';
+import '../consts/theme_data.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -20,10 +24,10 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final themesState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
         shadowColor: const Color.fromARGB(255, 111, 8, 143),
         elevation: 20,
         title: const Text(
@@ -34,6 +38,20 @@ class _LoginState extends State<Login> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          Switch(
+            activeColor: const Color.fromARGB(200, 92, 225, 230),
+            activeTrackColor: const Color.fromARGB(255, 111, 8, 143),
+            inactiveThumbColor: Color.fromARGB(131, 65, 64, 64),
+            inactiveTrackColor: const Color.fromARGB(255, 224, 224, 224),
+            onChanged: (bool value) => {
+              setState(() {
+                themesState.setdarkTheme = value;
+              })
+            },
+            value: themesState.getdarkThemes,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -75,7 +93,6 @@ class _LoginState extends State<Login> {
                 onPressed: () {},
                 child: const Text(
                   'Forgot Password?',
-                  style: TextStyle(color: Color.fromARGB(162, 36, 36, 36)),
                 ),
               ),
               CustomButton(
@@ -106,7 +123,6 @@ class _LoginState extends State<Login> {
                 },
                 child: const Text(
                   "Don't have an account? Sign Up",
-                  style: TextStyle(color: Color.fromARGB(162, 36, 36, 36)),
                 ),
               ),
             ],
