@@ -11,8 +11,8 @@ class SmallTextForm {
         boxShadow: [
           const BoxShadow(
             color: Color.fromARGB(200, 92, 225, 230),
-            blurRadius: 5,
-            offset: Offset(0, 5),
+            blurRadius: 3,
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -25,15 +25,8 @@ class SmallTextForm {
                     width: 1, color: Color.fromARGB(200, 92, 225, 230)),
               ),
               filled: true,
-              fillColor: const Color.fromARGB(255, 224, 224, 224),
               labelText: labelText,
               hintText: hintText,
-              hintStyle: const TextStyle(
-                color: Color.fromARGB(123, 0, 0, 0),
-              ),
-              labelStyle: const TextStyle(
-                color: Color.fromARGB(123, 0, 0, 0),
-              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
                 borderSide: const BorderSide(
