@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:frontend/screens/homeController.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/dark_theme_provider.dart';
 import 'components/customButton.dart';
+import 'login.dart';
+import 'mainChatsPage.dart';
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
@@ -15,7 +19,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   var screens = [
     HomeController(),
-    const Form(child: Text('HELLO NANAAAA')),
+    CustomCard(),
     const Form(child: Text('HELLO SAMMMM')),
   ];
 
@@ -27,6 +31,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final themesState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -41,7 +46,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
         leading: BackButton(
-          color: Colors.black,
+          color: const Color.fromARGB(255, 111, 8, 143),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -50,14 +55,33 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           PopupMenuButton(
               // add icon, by default "3 dot" icon
               icon: const Icon(
-                Icons.book,
-                color: Color.fromARGB(200, 92, 225, 230),
+                Icons.menu,
+                color: const Color.fromARGB(255, 111, 8, 143),
               ),
               itemBuilder: (context) {
                 return [
-                  const PopupMenuItem<int>(
+                  PopupMenuItem<int>(
                     value: 0,
-                    child: Text("My Account"),
+                    child: Row(
+                      children: [
+                        const Text('theme'),
+                        Switch(
+                          activeColor: const Color.fromARGB(200, 92, 225, 230),
+                          activeTrackColor:
+                              const Color.fromARGB(255, 111, 8, 143),
+                          inactiveThumbColor:
+                              const Color.fromARGB(131, 65, 64, 64),
+                          inactiveTrackColor:
+                              const Color.fromARGB(255, 224, 224, 224),
+                          onChanged: (bool value) => {
+                            setState(() {
+                              themesState.setdarkTheme = value;
+                            })
+                          },
+                          value: themesState.getdarkThemes,
+                        ),
+                      ],
+                    ),
                   ),
                   const PopupMenuItem<int>(
                     value: 1,
@@ -71,11 +95,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               },
               onSelected: (value) {
                 if (value == 0) {
-                  print("My account menu is selected.");
+                  print("Switch theme is selected.");
                 } else if (value == 1) {
                   print("Settings menu is selected.");
                 } else if (value == 2) {
-                  print("Logout menu is selected.");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
                 }
               }),
         ],
@@ -100,7 +127,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color.fromARGB(200, 92, 225, 230),
-        unselectedItemColor: Color.fromARGB(255, 111, 8, 143),
+        unselectedItemColor: const Color.fromARGB(255, 111, 8, 143),
         onTap: _onItemTapped,
       ),
     );
