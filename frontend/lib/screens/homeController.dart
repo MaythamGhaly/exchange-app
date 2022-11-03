@@ -44,9 +44,8 @@ class _HomeControllerState extends State<HomeController> {
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-                      elevation: 3,
-                      shadowColor: const Color.fromARGB(200, 92, 225, 230),
+                      elevation: 6,
+                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
                     ),
@@ -57,7 +56,6 @@ class _HomeControllerState extends State<HomeController> {
                   child: const Text(
                     'Food',
                     style: TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -78,9 +76,8 @@ class _HomeControllerState extends State<HomeController> {
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-                      elevation: 3,
-                      shadowColor: const Color.fromARGB(200, 92, 225, 230),
+                      elevation: 6,
+                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
                     ),
@@ -91,7 +88,6 @@ class _HomeControllerState extends State<HomeController> {
                   child: const Text(
                     'Beverage',
                     style: TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -112,9 +108,8 @@ class _HomeControllerState extends State<HomeController> {
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-                      elevation: 3,
-                      shadowColor: const Color.fromARGB(200, 92, 225, 230),
+                      elevation: 6,
+                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
                     ),
@@ -123,9 +118,8 @@ class _HomeControllerState extends State<HomeController> {
                 Container(
                   margin: const EdgeInsets.only(top: 5.0),
                   child: const Text(
-                    'Medicins',
+                    'Medicine',
                     style: TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -146,9 +140,8 @@ class _HomeControllerState extends State<HomeController> {
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-                      elevation: 3,
-                      shadowColor: const Color.fromARGB(200, 92, 225, 230),
+                      elevation: 6,
+                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
                     ),
@@ -157,9 +150,8 @@ class _HomeControllerState extends State<HomeController> {
                 Container(
                   margin: const EdgeInsets.only(top: 5.0),
                   child: const Text(
-                    'Skin care',
+                    'Beauty',
                     style: TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -180,9 +172,8 @@ class _HomeControllerState extends State<HomeController> {
                       size: 30,
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 224, 224, 224),
-                      elevation: 3,
-                      shadowColor: const Color.fromARGB(200, 92, 225, 230),
+                      elevation: 6,
+                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(10),
                     ),
@@ -193,7 +184,6 @@ class _HomeControllerState extends State<HomeController> {
                   child: const Text(
                     'Donate',
                     style: TextStyle(
-                      color: Color.fromARGB(200, 92, 225, 230),
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -212,7 +202,6 @@ class _HomeControllerState extends State<HomeController> {
                       child: TextFormField(
                         cursorColor: Colors.grey,
                         decoration: InputDecoration(
-                            fillColor: const Color.fromARGB(255, 224, 224, 224),
                             filled: true,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(50),
@@ -254,13 +243,10 @@ class _HomeControllerState extends State<HomeController> {
                       Image.asset('assets/1.jpg'),
                       Image.asset('assets/2.jpg'),
                       Image.asset('assets/3.jpg'),
-                      Image.asset('assets/3.jpg'),
-                      Image.asset('assets/3.jpg')
                     ].map((i) {
                       return Builder(
                         builder: (BuildContext context) {
                           return Container(
-                              width: MediaQuery.of(context).size.width,
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 5.0),
                               child: i);
@@ -285,9 +271,64 @@ class _HomeControllerState extends State<HomeController> {
                   ),
                   children: test
                       .map((item) => Card(
-                            elevation: 10,
-                            child: Center(child: Text(item)),
-                          ))
+                                elevation: 10,
+                                shadowColor:
+                                    const Color.fromARGB(255, 92, 225, 230),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: InkWell(
+                                    onTap: () {
+                                      print("hi");
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          'assets/Exchange-logo.png',
+                                          width: 120,
+                                          height: 120,
+                                        ),
+                                        const Text('Category - Name'),
+                                        const Text('EXP: 2022-12-31'),
+                                      ],
+                                    )),
+                              )
+                          // Card(
+                          //         child: Container(
+                          //             decoration: const BoxDecoration(
+                          //               image: DecorationImage(
+                          //                 image: AssetImage(
+                          //                     "assets/Exchange-logo.png"),
+                          //                 fit: BoxFit.fitWidth,
+                          //                 alignment: Alignment.bottomCenter,
+                          //               ),
+                          //             ),
+                          //             child: Container(
+                          //               alignment: Alignment.bottomCenter,
+                          //               child: const Text("Exp:" + " 2022-12-31\n",
+                          //                   style: TextStyle(
+                          //                       color: Color.fromARGB(255, 0, 0, 0),
+                          //                       fontSize: 20)),
+                          //             )))
+                          // Column(children: [
+                          //       Card(
+                          //           elevation: 10,
+                          //           shape: RoundedRectangleBorder(
+                          //               borderRadius: BorderRadius.circular(12)),
+                          //           child: InkWell(
+                          //               onTap: () {
+                          //                 print("hi");
+                          //               },
+                          //               child: Column(children: [
+                          //                 Image.asset("assets/Exchange-logo.png",
+                          //                     fit: BoxFit.cover),
+                          //                 Container(
+                          //                   child: const Center(
+                          //                     child: Text("item"),
+                          //                   ),
+                          //                 )
+                          //               ]))),
+                          //     ])
+                          )
                       .toList(),
                 ),
               )
