@@ -29,7 +29,6 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
         shadowColor: const Color.fromARGB(255, 111, 8, 143),
         elevation: 20,
         title: const Text(
@@ -116,8 +115,7 @@ class _RegisterState extends State<Register> {
                     const EdgeInsets.only(right: 30.0, left: 30.0, top: 10.0),
                 child: const Text(
                   "By registring, you agree to our Terms of Service and Privacy Policy",
-                  style: TextStyle(
-                      color: Color.fromARGB(161, 44, 44, 44), fontSize: 12),
+                  style: TextStyle(fontSize: 12),
                 ),
               ),
               CustomButton(
