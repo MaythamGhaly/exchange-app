@@ -20,13 +20,12 @@ class CustomButton extends StatelessWidget {
         // ignore: prefer_const_literals_to_create_immutables
         boxShadow: [
           const BoxShadow(
-            color: Color.fromARGB(200, 92, 225, 230),
+            color: Color.fromARGB(113, 151, 71, 255),
             offset: Offset(
               0,
               5.0,
             ),
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
+            blurRadius: 5.0,
           ),
         ],
       ),
