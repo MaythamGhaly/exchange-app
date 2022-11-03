@@ -13,12 +13,10 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   var screens = [
     HomeController(),
-    Form(child: Text('HELLO NANAAAA')),
-    Form(child: Text('HELLO SAMMMM')),
+    const Form(child: Text('HELLO NANAAAA')),
+    const Form(child: Text('HELLO SAMMMM')),
   ];
 
   void _onItemTapped(int index) {
@@ -32,7 +30,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
         shadowColor: const Color.fromARGB(255, 111, 8, 143),
         elevation: 20,
         title: const Text(
@@ -93,16 +90,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.chat),
+            label: 'Chats',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: const Color.fromARGB(200, 92, 225, 230),
+        unselectedItemColor: Color.fromARGB(255, 111, 8, 143),
         onTap: _onItemTapped,
       ),
     );
