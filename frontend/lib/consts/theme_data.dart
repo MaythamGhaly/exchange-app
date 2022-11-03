@@ -6,6 +6,21 @@ import 'package:frontend/screens/components/customButton.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: isDarkTheme
+            ? TextStyle(
+                color: Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
+            : TextStyle(
+                color: Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
+        labelStyle: isDarkTheme
+            ? TextStyle(
+                color: Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
+            : TextStyle(
+                color: Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
+        fillColor: isDarkTheme
+            ? Color.fromARGB(255, 90, 90, 90)
+            : Color.fromARGB(255, 226, 226, 226),
+      ),
       scaffoldBackgroundColor: isDarkTheme
           ? Color.fromARGB(255, 53, 53, 53)
           : Color.fromARGB(255, 255, 255, 255),
@@ -13,6 +28,17 @@ class Styles {
         backgroundColor:
             isDarkTheme ? Color.fromARGB(255, 53, 53, 53) : Colors.white,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isDarkTheme
+              ? Color.fromARGB(255, 90, 90, 90)
+              : Color.fromARGB(255, 226, 226, 226),
+        ),
+      ),
+      cardColor: isDarkTheme
+          ? Color.fromARGB(255, 90, 90, 90)
+          : Color.fromARGB(255, 226, 226, 226),
+
       // appBarTheme: AppBarTheme(
       //   backgroundColor:
       //       isDarkTheme ? Color.fromARGB(255, 53, 53, 53) : Colors.white,
@@ -42,6 +68,9 @@ class Styles {
       // brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       // buttonTheme: Theme.of(context).buttonTheme.copyWith(
       //     colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
+      iconTheme: IconThemeData(
+        color: isDarkTheme ? Colors.white : Colors.black,
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: isDarkTheme
             ? Color.fromARGB(255, 26, 26, 26)
