@@ -6,6 +6,10 @@ import 'package:frontend/screens/components/customButton.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      listTileTheme: ListTileThemeData(
+        textColor: isDarkTheme ? Colors.white : Colors.black,
+        iconColor: isDarkTheme ? Colors.white : Colors.black,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: isDarkTheme
             ? TextStyle(
@@ -85,6 +89,7 @@ class Styles {
               : Color.fromARGB(193, 51, 51, 51),
         ),
       ),
+
       textTheme: TextTheme(
         headline1: TextStyle(
           color: isDarkTheme ? Colors.white : Colors.black,
