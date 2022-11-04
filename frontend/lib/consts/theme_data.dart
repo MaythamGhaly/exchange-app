@@ -11,6 +11,21 @@ class Styles {
         iconColor: isDarkTheme ? Colors.white : Colors.black,
       ),
       inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(
+              width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(
+              width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(
+              width: 1, color: Color.fromARGB(200, 92, 225, 230)),
+        ),
         hintStyle: isDarkTheme
             ? TextStyle(
                 color: Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
