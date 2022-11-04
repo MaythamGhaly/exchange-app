@@ -19,19 +19,10 @@ class SmallTextForm {
       child: TextFormField(
           controller: textEditingController,
           decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                borderSide: const BorderSide(
-                    width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-              ),
-              filled: true,
-              labelText: labelText,
-              hintText: hintText,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                borderSide: const BorderSide(
-                    width: 1, color: Color.fromARGB(200, 92, 225, 230)),
-              )),
+            filled: true,
+            labelText: labelText,
+            hintText: hintText,
+          ),
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please enter some text';
