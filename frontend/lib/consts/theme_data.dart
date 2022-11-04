@@ -28,35 +28,37 @@ class Styles {
         ),
         hintStyle: isDarkTheme
             ? TextStyle(
-                color: Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
+                color:
+                    const Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
             : TextStyle(
-                color: Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
+                color: const Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
         labelStyle: isDarkTheme
             ? TextStyle(
-                color: Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
+                color:
+                    const Color.fromARGB(255, 219, 219, 219).withOpacity(0.5))
             : TextStyle(
-                color: Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
+                color: const Color.fromARGB(255, 65, 65, 65).withOpacity(0.5)),
         fillColor: isDarkTheme
-            ? Color.fromARGB(255, 90, 90, 90)
-            : Color.fromARGB(255, 226, 226, 226),
+            ? const Color.fromARGB(255, 90, 90, 90)
+            : const Color.fromARGB(255, 226, 226, 226),
       ),
       scaffoldBackgroundColor: isDarkTheme
-          ? Color.fromARGB(255, 53, 53, 53)
-          : Color.fromARGB(255, 255, 255, 255),
+          ? const Color.fromARGB(255, 53, 53, 53)
+          : const Color.fromARGB(255, 255, 255, 255),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor:
-            isDarkTheme ? Color.fromARGB(255, 53, 53, 53) : Colors.white,
+            isDarkTheme ? const Color.fromARGB(255, 53, 53, 53) : Colors.white,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: isDarkTheme
-              ? Color.fromARGB(255, 90, 90, 90)
-              : Color.fromARGB(255, 226, 226, 226),
+              ? const Color.fromARGB(255, 90, 90, 90)
+              : const Color.fromARGB(255, 226, 226, 226),
         ),
       ),
       cardColor: isDarkTheme
-          ? Color.fromARGB(255, 90, 90, 90)
-          : Color.fromARGB(255, 226, 226, 226),
+          ? const Color.fromARGB(255, 90, 90, 90)
+          : const Color.fromARGB(255, 226, 226, 226),
 
       // appBarTheme: AppBarTheme(
       //   backgroundColor:
@@ -92,16 +94,16 @@ class Styles {
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: isDarkTheme
-            ? Color.fromARGB(255, 26, 26, 26)
-            : Color.fromARGB(255, 255, 255, 255),
+            ? const Color.fromARGB(255, 26, 26, 26)
+            : const Color.fromARGB(255, 255, 255, 255),
       ),
       // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
       //     .copyWith(secondary: Colors.deepPurple),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: isDarkTheme
-              ? Color.fromARGB(211, 223, 223, 223)
-              : Color.fromARGB(193, 51, 51, 51),
+              ? const Color.fromARGB(211, 223, 223, 223)
+              : const Color.fromARGB(193, 51, 51, 51),
         ),
       ),
 
