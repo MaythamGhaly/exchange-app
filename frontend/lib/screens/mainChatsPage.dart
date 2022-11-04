@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/login.dart';
 
+import 'chatingPage.dart';
+
 class CustomCard extends StatelessWidget {
   List test = [
     {"name": "test1", "lastChat": "hello"},
@@ -11,8 +13,8 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (contex) => const Login()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (contex) => const ChatingPage()));
       },
       child: Column(
         children: [
