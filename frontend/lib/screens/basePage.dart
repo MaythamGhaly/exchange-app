@@ -34,6 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     final themesState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         shadowColor: const Color.fromARGB(255, 111, 8, 143),
         elevation: 20,
@@ -44,12 +45,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        leading: BackButton(
-          color: const Color.fromARGB(255, 111, 8, 143),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
         actions: [
           PopupMenuButton(

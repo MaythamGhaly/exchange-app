@@ -4,11 +4,8 @@ import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:frontend/screens/components/customTextForm.dart';
 import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/register.dart';
-import 'package:frontend/screens/basePage.dart';
 import 'package:provider/provider.dart';
 import 'components/customButton.dart';
-import '../shared_preferences/dark_theme_pref.dart';
-import '../consts/theme_data.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -116,7 +113,7 @@ class _LoginState extends State<Login> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const Register()),
                   );
