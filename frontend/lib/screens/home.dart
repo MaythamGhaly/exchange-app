@@ -271,64 +271,27 @@ class _HomeControllerState extends State<HomeController> {
                   ),
                   children: test
                       .map((item) => Card(
-                                elevation: 10,
-                                shadowColor:
-                                    const Color.fromARGB(255, 92, 225, 230),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: InkWell(
-                                    onTap: () {
-                                      print("hi");
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/Exchange-logo.png',
-                                          width: 120,
-                                          height: 120,
-                                        ),
-                                        const Text('Category - Name'),
-                                        const Text('EXP: 2022-12-31'),
-                                      ],
-                                    )),
-                              )
-                          // Card(
-                          //         child: Container(
-                          //             decoration: const BoxDecoration(
-                          //               image: DecorationImage(
-                          //                 image: AssetImage(
-                          //                     "assets/Exchange-logo.png"),
-                          //                 fit: BoxFit.fitWidth,
-                          //                 alignment: Alignment.bottomCenter,
-                          //               ),
-                          //             ),
-                          //             child: Container(
-                          //               alignment: Alignment.bottomCenter,
-                          //               child: const Text("Exp:" + " 2022-12-31\n",
-                          //                   style: TextStyle(
-                          //                       color: Color.fromARGB(255, 0, 0, 0),
-                          //                       fontSize: 20)),
-                          //             )))
-                          // Column(children: [
-                          //       Card(
-                          //           elevation: 10,
-                          //           shape: RoundedRectangleBorder(
-                          //               borderRadius: BorderRadius.circular(12)),
-                          //           child: InkWell(
-                          //               onTap: () {
-                          //                 print("hi");
-                          //               },
-                          //               child: Column(children: [
-                          //                 Image.asset("assets/Exchange-logo.png",
-                          //                     fit: BoxFit.cover),
-                          //                 Container(
-                          //                   child: const Center(
-                          //                     child: Text("item"),
-                          //                   ),
-                          //                 )
-                          //               ]))),
-                          //     ])
-                          )
+                            elevation: 10,
+                            shadowColor:
+                                const Color.fromARGB(255, 92, 225, 230),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: InkWell(
+                                onTap: () {
+                                  print("hi");
+                                },
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/Exchange-logo.png',
+                                      width: 120,
+                                      height: 120,
+                                    ),
+                                    const Text('Category - Name'),
+                                    const Text('EXP: 2022-12-31'),
+                                  ],
+                                )),
+                          ))
                       .toList(),
                 ),
               )

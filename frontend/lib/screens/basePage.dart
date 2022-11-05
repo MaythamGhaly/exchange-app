@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:frontend/screens/homeController.dart';
+import 'package:frontend/screens/home.dart';
+import 'package:frontend/screens/profile.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/dark_theme_provider.dart';
@@ -20,7 +21,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var screens = [
     HomeController(),
     CustomCard(),
-    const Form(child: Text('HELLO SAMMMM')),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {
