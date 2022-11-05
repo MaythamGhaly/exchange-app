@@ -40,13 +40,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         child: Column(children: <Widget>[
       Container(
         margin: const EdgeInsets.only(top: 30),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(120),
-          child: Image.asset(
+        child: CircleAvatar(
+          backgroundColor: Colors.black,
+          backgroundImage: Image.asset(
             'assets/profile.jpg',
-            width: 140,
-            height: 145,
-          ),
+          ).image,
+          radius: 80.0,
         ),
       ),
       Center(
