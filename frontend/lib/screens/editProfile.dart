@@ -39,18 +39,20 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        shadowColor: const Color.fromARGB(255, 111, 8, 143),
-        elevation: 20,
-        title: const Text(
-          'Edit Profile',
-          style: TextStyle(
-            color: Color.fromARGB(200, 92, 225, 230),
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+          centerTitle: true,
+          shadowColor: const Color.fromARGB(255, 111, 8, 143),
+          elevation: 20,
+          title: const Text(
+            'Edit Profile',
+            style: TextStyle(
+              color: Color.fromARGB(200, 92, 225, 230),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ),
+          leading: const BackButton(
+            color: Color.fromARGB(255, 111, 8, 143),
+          )),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

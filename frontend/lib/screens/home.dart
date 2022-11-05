@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontend/screens/productsPage.dart';
 
 class HomeController extends StatefulWidget {
   HomeController({super.key});
@@ -278,7 +279,11 @@ class _HomeControllerState extends State<HomeController> {
                                 borderRadius: BorderRadius.circular(20)),
                             child: InkWell(
                                 onTap: () {
-                                  print("hi");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProductPage()),
+                                  );
                                 },
                                 child: Column(
                                   children: [
