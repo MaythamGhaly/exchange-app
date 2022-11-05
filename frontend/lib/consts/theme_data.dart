@@ -6,6 +6,11 @@ import 'package:frontend/screens/components/customButton.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+      dividerTheme: DividerThemeData(
+        color: isDarkTheme
+            ? const Color.fromARGB(255, 104, 104, 104)
+            : const Color.fromARGB(255, 224, 224, 224),
+      ),
       tabBarTheme: TabBarTheme(
         indicator: ShapeDecoration(
             shape: const RoundedRectangleBorder(
