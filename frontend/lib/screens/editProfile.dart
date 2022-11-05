@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/screens/components/customTextForm.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'components/customButton.dart';
 import 'components/smallTextField.dart';
 
@@ -20,8 +21,18 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  hello() {
-    print('hello');
+  File? _image;
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) return null;
+
+    final ImageTemporary = File(image.path);
+
+    print(ImageTemporary);
+    setState(() {
+      this._image = ImageTemporary;
+    });
   }
 
   @override
@@ -47,14 +58,45 @@ class _EditProfileState extends State<EditProfile> {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.only(top: 30),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(120),
-                  child: Image.asset(
-                    'assets/profile.jpg',
-                    width: 140,
-                    height: 145,
-                  ),
-                ),
+                child: Column(children: [
+                  Center(
+                      child: _image != null
+                          ? CircleAvatar(
+                              backgroundColor: Colors.black,
+                              backgroundImage: Image.file(
+                                _image!,
+                              ).image,
+                              radius: 80.0,
+                            )
+                          : CircleAvatar(
+                              backgroundColor: Colors.black,
+                              backgroundImage: Image.asset(
+                                'assets/profile.jpg',
+                              ).image,
+                              radius: 80.0,
+                            )),
+                  // ClipRRect(
+                  //     borderRadius: BorderRadius.circular(100),
+                  //     child: _image != null
+                  //         ? Image.file(
+                  //             _image!,
+                  //             height: 200,
+                  //             width: 200,
+                  //           )
+                  //         : Image.asset(
+                  //             'assets/profile.jpg',
+                  //             height: 200,
+                  //             width: 200,
+                  //           )
+                  // Image.asset(
+                  //   'assets/profile.jpg',
+                  //   width: 140,
+                  //   height: 145,
+                  // ),
+                  // ),
+                  IconButton(
+                      onPressed: getImage, icon: const Icon(Icons.add_a_photo)),
+                ]),
               ),
               Row(
                 children: <Widget>[
