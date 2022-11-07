@@ -24,18 +24,7 @@ const addProduct = async (req, res) => {
     return res.send(userById);
 }
 
-const editProfile = async (req, res) => {
-    id = req.user._id;
-    const { first_name, last_name, password , confirm_pass } = req.body;
-    const user = await User.findOneAndUpdate(id, {
-        first_name,
-        last_name,
-        password,
-        confirm_pass
-    })
 
-return res.send(user)
-}
 
 module.exports = {
     addProduct,
