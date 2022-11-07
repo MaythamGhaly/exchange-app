@@ -14,9 +14,4 @@ router.get('/get-favorites',authMiddleware, getFavorites);
 router.get('/get-product-by-id/:id',authMiddleware, getProductById);
 
 
-
-
-
-
-
 module.exports = router;

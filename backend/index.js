@@ -13,6 +13,9 @@ app.use('/auth', authRoutes)
 const UsersRoutes = require('./routes/user.routes');
 app.use('/', UsersRoutes)
 
+const AdminRoutes = require('./routes/admin.routes');
+app.use('/', AdminRoutes)
+
 
 
 app.listen(process.env.PORT, (err)=>{
