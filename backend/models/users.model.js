@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: 'email is required',
         unique: true,
-        trim: true
+        trim: true,
     },
     password: {
         type: String,
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     products: [
-        {type: mongoose.Schema.Types.ObjectId,ref:'Post'}
+        {type: mongoose.Schema.Types.ObjectId,ref:'Product'}
     ],
 })
 
