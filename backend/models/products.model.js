@@ -27,11 +27,15 @@ const productsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    user :{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
+    favorites: 
+        {type: mongoose.Schema.Types.ObjectId,ref:'Favorite'}
+    
+
 })
 
 
-module.exports = mongoose.model('Product',productsSchema);
+module.exports = mongoose.model('Product', productsSchema);

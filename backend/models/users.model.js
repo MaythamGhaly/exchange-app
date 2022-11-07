@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema({
     products: [
         {type: mongoose.Schema.Types.ObjectId,ref:'Product'}
     ],
+    favorites: 
+        {type: mongoose.Schema.Types.ObjectId,ref:'Favorite'}
+    
 })
 
 module.exports = mongoose.model('User', userSchema);
