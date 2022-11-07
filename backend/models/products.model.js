@@ -27,6 +27,10 @@ const productsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    deal_done: {
+        type: Boolean,
+        default: false
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

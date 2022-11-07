@@ -7,7 +7,7 @@ const Favorite = require('../models/favorites.model');
 
 const addProduct = async (req, res) => {
     id = req.user._id;
-    const { product_name, expiry_date, picture_url, description , category  } = req.body;
+    const { product_name, expiry_date, picture_url, description, category } = req.body;
     const product = await Product.create({
         product_name,
         expiry_date,
@@ -27,13 +27,13 @@ const addProduct = async (req, res) => {
 }
 
 const getAllProduct = async (req, res) => {
-    const product = await Product.find({$where: "this.approved == true"});
+    const product = await Product.find({approved:true, deal_done:false});
     return res.send(product)
 }
 
 const getProductByCategory = async (req, res) => {
     const { category } = req.body;
-    const product = await Product.find({'category': category});
+    const product = await Product.find({ 'category': category , approved:true, deal_done:false });
     return res.send(product)
 }
 
@@ -49,17 +49,17 @@ const addFavorite = async (req, res) => {
     const favorite = await Favorite.create({
         product_id: product_id,
         user: id,
-        
+
     });
     await favorite.save();
 
-    return res.send({message: "success"});
+    return res.send({ message: "success" });
 }
 
 const editProfile = async (req, res) => {
     id = req.user._id;
-    const { first_name, last_name, password , confirm_pass } = req.body;
-    if(password !== confirm_pass) return res.status(400).json({message: "Passwords do not match"});
+    const { first_name, last_name, password, confirm_pass } = req.body;
+    if (password !== confirm_pass) return res.status(400).json({ message: "Passwords do not match" });
     await User.findOneAndUpdate(id, {
         first_name,
         last_name,
@@ -67,14 +67,23 @@ const editProfile = async (req, res) => {
         confirm_pass
     })
 
-return res.send({'status': "success"})
+    return res.send({ 'status': "success" })
 }
 
-const getFavorites= async (req, res) => {
+const getFavorites = async (req, res) => {
     id = req.user._id;
-    const user = await Favorite.find({id}).populate('product_id');
+    const user = await Favorite.find({ id }).populate('product_id');
     return res.send(user)
 }
+
+const dealDone = async (req, res) => {
+    const { id } = req.params;
+    await Product.findByIdAndUpdate(id, {
+        deal_done: true
+    })
+    return res.send({ 'status': "success" })
+}
+
 
 module.exports = {
     addProduct,
@@ -83,5 +92,6 @@ module.exports = {
     getProductByCategory,
     addFavorite,
     getFavorites,
-    getProductById
+    getProductById,
+    dealDone
 }
