@@ -27,7 +27,7 @@ const addProduct = async (req, res) => {
 }
 
 const getAllProduct = async (req, res) => {
-    const product = await Product.find({});
+    const product = await Product.find({$where: "this.approved == true"});
     return res.send(product)
 }
 

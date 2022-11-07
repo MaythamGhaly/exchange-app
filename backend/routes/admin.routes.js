@@ -7,6 +7,6 @@ const {approvedPost} = require('../controllers/admin.controller')
 
 
 
-router.get('/approved/:id', authMiddleware , approvedPost );
+router.get('/approved/:id', authMiddleware ,adminMiddleware, approvedPost );
 
 module.exports = router;
