@@ -37,6 +37,12 @@ const getProductByCategory = async (req, res) => {
     return res.send(product)
 }
 
+const getProductById = async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id).populate('user');
+    return res.send(product)
+}
+
 const addFavorite = async (req, res) => {
     id = req.user._id;
     const { product_id } = req.body;
@@ -47,12 +53,7 @@ const addFavorite = async (req, res) => {
     });
     await favorite.save();
 
-    // const userById = await User.findById(id);
-
-    // userById.favorites.push(favorite);
-    // await userById.save();
-
-    return res.send(favorite);
+    return res.send({message: "success"});
 }
 
 const editProfile = async (req, res) => {
@@ -81,5 +82,6 @@ module.exports = {
     getAllProduct,
     getProductByCategory,
     addFavorite,
-    getFavorites
+    getFavorites,
+    getProductById
 }
