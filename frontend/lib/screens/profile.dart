@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         ),
       ),
       Container(
-        height: 500,
+        height: 550,
         child: TabBarView(
           controller: _controller,
           children: <Widget>[

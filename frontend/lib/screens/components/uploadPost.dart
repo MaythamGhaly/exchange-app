@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/components/customButton.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,10 +30,17 @@ class _UploadPostState extends State<UploadPost> {
 
     final ImageTemporary = File(image.path);
 
-    print(ImageTemporary);
     setState(() {
-      this._image = ImageTemporary;
+      _image = ImageTemporary;
     });
+  }
+
+  Future upload() async {
+    if (_image == null) return;
+
+    String base64 = base64Encode(_image!.readAsBytesSync());
+    String imageName = _image!.path.split("/").last;
+    print(imageName);
   }
 
   ImagePicker picker = ImagePicker();
@@ -165,9 +174,7 @@ class _UploadPostState extends State<UploadPost> {
               inputText: 'Upload Post',
               onpressed: () {
                 if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('yes')),
-                  );
+                  upload();
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('no')),
