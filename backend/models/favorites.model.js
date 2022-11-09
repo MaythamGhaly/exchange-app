@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+// favoriteSchema
 const favoritesSchema = new mongoose.Schema({
 
     product_id :{

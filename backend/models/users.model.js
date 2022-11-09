@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+// userSchema
 const userSchema = new mongoose.Schema({
     first_name: {
         type: String,
@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: 'type is required',
         enum: ['Admin', 'User']
+    },
+    profilePicture: {
+        type: String,
+        required: false,
     },
     banned: {
         type: Boolean,

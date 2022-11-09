@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+// productSchema
 const productsSchema = new mongoose.Schema({
 
     product_name: {
@@ -10,7 +10,7 @@ const productsSchema = new mongoose.Schema({
         type: Date,
         required: 'expiry_date is required'
     },
-    picture_url: {
+    productPicture: {
         type: String,
         required: 'picture_url is required'
     },

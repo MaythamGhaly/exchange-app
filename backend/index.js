@@ -17,6 +17,7 @@ const AdminRoutes = require('./routes/admin.routes');
 app.use('/', AdminRoutes)
 
 
+app.use(express.static('public'));
 
 app.listen(process.env.PORT, (err)=>{
     if(err) throw err;

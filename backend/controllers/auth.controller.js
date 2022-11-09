@@ -1,7 +1,7 @@
 const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+// api login
 const login = async (req, res)=>{
     const {email, password} = req.body;
     
@@ -23,7 +23,7 @@ const login = async (req, res)=>{
         'token':token
     })
 }
-
+// api register
 const signup = async (req, res)=>{
     const {first_name,last_name, email, password , confirm_pass , type} = req.body;
     if(password !== confirm_pass) return res.status(400).json({message: "Passwords do not match"});
@@ -44,7 +44,7 @@ const signup = async (req, res)=>{
         })
     }
 }
-
+// export all the functions
 module.exports = {
     login,
     signup
