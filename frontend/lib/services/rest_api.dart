@@ -45,7 +45,7 @@ class ApiService {
     });
     try {
       var response = await http.post(
-          Uri.parse("http://192.168.0.125:3000/auth/login"),
+          Uri.parse("http://192.168.0.101:3000/auth/login"),
           headers: headers,
           body: msg);
       jsonData = json.decode(response.body);
@@ -76,7 +76,7 @@ class ApiService {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var response = await http
-        .get(Uri.parse('http://192.168.0.125:3000/get-all-products'), headers: {
+        .get(Uri.parse('http://192.168.0.101:3000/get-all-products'), headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
