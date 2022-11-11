@@ -39,9 +39,9 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 | --------------------| -----------------|-----------------|------------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/product%20page-1.svg) |
 
-| Artists results  | Artist's Albums  |
-| -----------------| -----|
-| ![Artists results](https://github.com/julescript/spotifyndr/blob/master/demo/Artists_Page.jpg) | ![Artist's Albums](https://github.com/julescript/spotifyndr/blob/master/demo/Albums_Page.jpg) |
+| Register(darkmode) | Login(darkmode) | Home(darkmode) | ProductPage(darkmode) | 
+| --------------------| -----------------|-----------------|------------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/product%20page.svg) |
 
 
 <br><br>
