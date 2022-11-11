@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontend/screens/components/CustomCategoryButton.dart';
 import 'package:frontend/screens/models/product.dart';
 import 'package:frontend/screens/productsPage.dart';
 import 'package:http/http.dart' as http;
@@ -18,22 +19,10 @@ class HomeController extends StatefulWidget {
 
 class _HomeControllerState extends State<HomeController> {
   final _formKey = GlobalKey<FormState>();
-  List test = [
-    "test",
-    "test2",
-    "Stest3",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4"
-  ];
   List<Product> products = [];
   getProduct() async {
     var data = await ApiService.getProduct();
+
     setState(() {
       products = data;
     });
@@ -53,166 +42,20 @@ class _HomeControllerState extends State<HomeController> {
       child: Column(
         children: <Widget>[
           Row(children: <Widget>[
-            Expanded(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    // ignore: sort_child_properties_last
-                    child: const Icon(
-                      Icons.food_bank_outlined,
-                      color: Color.fromARGB(255, 151, 71, 255),
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 6,
-                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: const Text(
-                    'Food',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    // ignore: sort_child_properties_last
-                    child: const Icon(
-                      Icons.emoji_food_beverage,
-                      color: Color.fromARGB(255, 151, 71, 255),
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 6,
-                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: const Text(
-                    'Beverage',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    // ignore: sort_child_properties_last
-                    child: const Icon(
-                      Icons.medication_outlined,
-                      color: Color.fromARGB(255, 151, 71, 255),
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 6,
-                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: const Text(
-                    'Medicine',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    // ignore: sort_child_properties_last
-                    child: const Icon(
-                      Icons.auto_fix_high,
-                      color: Color.fromARGB(255, 151, 71, 255),
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 6,
-                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: const Text(
-                    'Beauty',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Column(children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    // ignore: sort_child_properties_last
-                    child: const Icon(
-                      Icons.bloodtype,
-                      color: Color.fromARGB(255, 151, 71, 255),
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 6,
-                      shadowColor: const Color.fromARGB(255, 92, 225, 230),
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5.0),
-                  child: const Text(
-                    'Donate',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ]),
-            ),
+            CustomCategory(
+                text: 'Food', onpressed: () {}, icon: Icons.food_bank_outlined),
+            CustomCategory(
+                text: 'Beverage',
+                onpressed: () {},
+                icon: Icons.emoji_food_beverage),
+            CustomCategory(
+                text: 'Medicine',
+                onpressed: () {},
+                icon: Icons.medication_outlined),
+            CustomCategory(
+                text: 'Beauty', onpressed: () {}, icon: Icons.auto_fix_high),
+            CustomCategory(
+                text: 'Donate', onpressed: () {}, icon: Icons.bloodtype),
           ]),
           Container(
             margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
@@ -308,13 +151,15 @@ class _HomeControllerState extends State<HomeController> {
                                 },
                                 child: Column(
                                   children: [
-                                    // Image.network(
-                                    //   product.productPicture,
-                                    //   width: 120,
-                                    //   height: 120,
-                                    // ),
-                                    Text(product.product_name),
-                                    const Text('EXP: 2022-12-31'),
+                                    Image.network(
+                                      'http://192.168.0.101:3000//uploads//${product.productPicture}',
+                                      width: 120,
+                                      height: 120,
+                                    ),
+                                    Text(
+                                        '${product.product_name}-${product.category}'),
+                                    Text(
+                                        'EXP:${product.expiry_date.split('T')[0]}'),
                                   ],
                                 )),
                           ))
