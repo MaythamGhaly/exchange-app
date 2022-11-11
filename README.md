@@ -35,9 +35,9 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Landing  | Home/Search  |
+| Register(lightmode) | Login(lightmode) | Home(lightmode) | ProductPage(lightmode) | 
 | -----------------| -----|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page-1.svg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page-1.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/login%20page-1.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/home%20page-1.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/product%20page-1.jpg) |
 
 | Artists results  | Artist's Albums  |
 | -----------------| -----|
