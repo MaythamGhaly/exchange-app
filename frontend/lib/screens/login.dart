@@ -1,11 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:frontend/screens/components/customTextForm.dart';
 import 'package:frontend/screens/basePage.dart';
+import 'package:frontend/screens/editProfile.dart';
+import 'package:frontend/screens/models/user.dart';
 import 'package:frontend/screens/register.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../services/rest_api.dart';
 import 'components/customButton.dart';
+import 'package:http/http.dart' as http;
+
+import 'home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,8 +24,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,9 +46,9 @@ class _LoginState extends State<Login> {
         ),
         actions: [
           Switch(
-            activeColor: const Color.fromARGB(200, 92, 225, 230),
+            activeColor: Color.fromARGB(199, 1, 5, 5),
             activeTrackColor: const Color.fromARGB(255, 111, 8, 143),
-            inactiveThumbColor: Color.fromARGB(131, 65, 64, 64),
+            inactiveThumbColor: const Color.fromARGB(131, 65, 64, 64),
             inactiveTrackColor: const Color.fromARGB(255, 224, 224, 224),
             onChanged: (bool value) => {
               setState(() {
@@ -83,9 +92,15 @@ class _LoginState extends State<Login> {
                     ]),
               ),
               CustomTextForm.customText(context, 'Email', 'enter your email',
-                  _email, false, _password, false),
-              CustomTextForm.customText(context, "Password",
-                  "enter your password", _password, false, _password, true),
+                  _emailController, false, _passwordController, false),
+              CustomTextForm.customText(
+                  context,
+                  "Password",
+                  "enter your password",
+                  _passwordController,
+                  false,
+                  _passwordController,
+                  true),
               TextButton(
                 onPressed: () {},
                 child: const Text(
@@ -93,24 +108,36 @@ class _LoginState extends State<Login> {
                 ),
               ),
               CustomButton(
-                inputText: 'Login',
-                onpressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MyStatefulWidget()),
-                  );
-                  // if (_formKey.currentState!.validate()) {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('Processing Data')),
-                  //   );
-                  // } else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(
-                  //     const SnackBar(content: Text('Processing')),
-                  //   );
-                  // }
-                },
-              ),
+                  inputText: 'Login',
+                  onpressed: () {
+                    ApiService.signin(
+                            User(
+                                email: _emailController.text,
+                                password: _passwordController.text),
+                            context)
+                        .then((value) => {
+                              if (value == true)
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyStatefulWidget()),
+                                  )
+                                }
+                            });
+                  }),
+
+              // if (_formKey.currentState!.validate()) {
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('Processing Data')),
+              //   );
+              // } else {
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     const SnackBar(content: Text('Processing')),
+              //   );
+              // }
+
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(

@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontend/screens/models/product.dart';
 import 'package:frontend/screens/productsPage.dart';
+import 'package:http/http.dart' as http;
+
+import '../services/rest_api.dart';
 
 class HomeController extends StatefulWidget {
-  HomeController({super.key});
+  const HomeController({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -25,6 +31,21 @@ class _HomeControllerState extends State<HomeController> {
     "test4",
     "test4"
   ];
+  List<Product> products = [];
+  getProduct() async {
+    var data = await ApiService.getProduct();
+    setState(() {
+      products = data;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -270,8 +291,8 @@ class _HomeControllerState extends State<HomeController> {
                     // horizontal spacing between the items
                     crossAxisSpacing: 10,
                   ),
-                  children: test
-                      .map((item) => Card(
+                  children: products
+                      .map((product) => Card(
                             elevation: 10,
                             shadowColor:
                                 const Color.fromARGB(255, 92, 225, 230),
@@ -287,12 +308,12 @@ class _HomeControllerState extends State<HomeController> {
                                 },
                                 child: Column(
                                   children: [
-                                    Image.asset(
-                                      'assets/Exchange-logo.png',
-                                      width: 120,
-                                      height: 120,
-                                    ),
-                                    const Text('Category - Name'),
+                                    // Image.network(
+                                    //   product.productPicture,
+                                    //   width: 120,
+                                    //   height: 120,
+                                    // ),
+                                    Text(product.product_name),
                                     const Text('EXP: 2022-12-31'),
                                   ],
                                 )),
