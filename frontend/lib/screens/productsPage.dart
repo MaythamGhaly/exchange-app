@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/categoryPage.dart';
 import 'package:frontend/screens/login.dart';
+import 'package:frontend/screens/models/product.dart';
 
+import '../services/rest_api.dart';
 import 'chatingPage.dart';
 import 'components/customButton.dart';
 import 'components/uploadPost.dart';
@@ -8,24 +11,31 @@ import 'editProfile.dart';
 import 'home.dart';
 
 class ProductPage extends StatefulWidget {
+  var product;
+  ProductPage({super.key, required this.product});
   @override
   _ProductPageState createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  List test = [
-    "test",
-    "test2",
-    "Stest3",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4"
-  ];
+  var product;
+
+  List<dynamic> products = [];
+  getProductByCategory() async {
+    var data = await ApiService.getProductByCategory(product['category']);
+    setState(() {
+      products = data;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    product = widget.product;
+    getProductByCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,24 +43,27 @@ class _ProductPageState extends State<ProductPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        'assets/Exchange-logo.png',
-                      ),
-                      fit: BoxFit.cover),
+              Stack(children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.topLeft,
+                  child: Image.network(
+                    'http://192.168.1.12:3000//uploads//${product['productPicture']}',
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                  ),
                 ),
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  iconSize: 40,
-                  icon: const Icon(Icons.arrow_back),
-                  color: const Color.fromARGB(255, 151, 71, 255),
-                  onPressed: () => Navigator.of(context).pop(),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: IconButton(
+                    iconSize: 40,
+                    icon: const Icon(Icons.arrow_back),
+                    color: const Color.fromARGB(255, 151, 71, 255),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
                 ),
-              ),
+              ]),
               Container(
                   child: Row(
                 children: [
@@ -59,9 +72,9 @@ class _ProductPageState extends State<ProductPage> {
                       children: [
                         Container(
                           alignment: Alignment.topLeft,
-                          child: const Text(
-                            'Product Name',
-                            style: TextStyle(
+                          child: Text(
+                            product['product_name'],
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
@@ -69,9 +82,9 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          child: const Text(
-                            '1/1/2023',
-                            style: TextStyle(
+                          child: Text(
+                            'EXP:${product['expiry_date'].split('T')[0]}',
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
@@ -100,11 +113,11 @@ class _ProductPageState extends State<ProductPage> {
               Container(
                 margin: const EdgeInsets.only(
                     top: 25, right: 10, left: 10, bottom: 25),
-                child: const Center(
+                child: Center(
                   child: Text(
+                    product['description'],
                     textAlign: TextAlign.center,
-                    'I’d like to exchange this panadol medicine box with micerol or vitamin D-C or zinc tablets',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -116,16 +129,16 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.black,
-                    backgroundImage: Image.asset(
-                      'assets/profile.jpg',
+                    backgroundImage: Image.network(
+                      'http://192.168.1.12:3000//uploads//${product['user']['profilePicture']}',
                     ).image,
                     radius: 20.0,
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10),
-                    child: const Text(
-                      'Maytham Ghaly',
-                      style: TextStyle(
+                    child: Text(
+                      '${product['user']['first_name']} ${product['user']['last_name']}',
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
@@ -172,49 +185,7 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 500,
-                    child: GridView(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        // number of items per row
-                        crossAxisCount: 2,
-                        // vertical spacing between the items
-                        mainAxisSpacing: 10,
-                        // horizontal spacing between the items
-                        crossAxisSpacing: 10,
-                      ),
-                      children: test
-                          .map((item) => Card(
-                                elevation: 10,
-                                shadowColor:
-                                    const Color.fromARGB(255, 92, 225, 230),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProductPage()),
-                                      );
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/Exchange-logo.png',
-                                          width: 120,
-                                          height: 120,
-                                        ),
-                                        const Text('Category - Name'),
-                                        const Text('EXP: 2022-12-31'),
-                                      ],
-                                    )),
-                              ))
-                          .toList(),
-                    ),
-                  )
+                  CategoryPage(category: product['category'])
                 ],
               ),
             ],
