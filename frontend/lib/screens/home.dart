@@ -3,36 +3,29 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:frontend/screens/components/CustomCategoryButton.dart';
-import 'package:frontend/screens/models/product.dart';
 import 'package:frontend/screens/productsPage.dart';
 import 'package:http/http.dart' as http;
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 import '../services/rest_api.dart';
+import 'categoryPage.dart';
 
 class HomeController extends StatefulWidget {
-  const HomeController({super.key});
-
   @override
   // ignore: library_private_types_in_public_api
   _HomeControllerState createState() => _HomeControllerState();
 }
 
-class _HomeControllerState extends State<HomeController> {
+class _HomeControllerState extends State<HomeController>
+    with TickerProviderStateMixin {
+  late TabController _controller;
   final _formKey = GlobalKey<FormState>();
-  List<Product> products = [];
-  getProduct() async {
-    var data = await ApiService.getProduct();
-
-    setState(() {
-      products = data;
-    });
-  }
 
   @override
   void initState() {
-    // TODO: implement initState
+    _controller = TabController(length: 5, vsync: this);
+
     super.initState();
-    getProduct();
   }
 
   @override
@@ -41,22 +34,37 @@ class _HomeControllerState extends State<HomeController> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          Row(children: <Widget>[
-            CustomCategory(
-                text: 'Food', onpressed: () {}, icon: Icons.food_bank_outlined),
-            CustomCategory(
-                text: 'Beverage',
-                onpressed: () {},
-                icon: Icons.emoji_food_beverage),
-            CustomCategory(
-                text: 'Medicine',
-                onpressed: () {},
-                icon: Icons.medication_outlined),
-            CustomCategory(
-                text: 'Beauty', onpressed: () {}, icon: Icons.auto_fix_high),
-            CustomCategory(
-                text: 'Donate', onpressed: () {}, icon: Icons.bloodtype),
-          ]),
+          Container(
+            margin: const EdgeInsets.only(top: 25),
+            child: Center(
+              child: SizedBox(
+                  height: 150.0,
+                  width: 300.0,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        height: 400.0,
+                        autoPlay: true,
+                        viewportFraction: 1,
+                        autoPlayInterval: const Duration(seconds: 3),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 800)),
+                    items: [
+                      Image.asset('assets/1.jpg'),
+                      Image.asset('assets/2.jpg'),
+                      Image.asset('assets/3.jpg'),
+                    ].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: i);
+                        },
+                      );
+                    }).toList(),
+                  )),
+            ),
+          ),
           Container(
             margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
             child: Column(
@@ -91,82 +99,53 @@ class _HomeControllerState extends State<HomeController> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 25),
-            child: Center(
-              child: SizedBox(
-                  height: 150.0,
-                  width: 300.0,
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                        height: 400.0,
-                        autoPlay: true,
-                        viewportFraction: 1,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800)),
-                    items: [
-                      Image.asset('assets/1.jpg'),
-                      Image.asset('assets/2.jpg'),
-                      Image.asset('assets/3.jpg'),
-                    ].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: i);
-                        },
-                      );
-                    }).toList(),
-                  )),
+            margin: const EdgeInsets.only(top: 20),
+            child: TabBar(
+              indicatorColor: const Color.fromARGB(200, 92, 225, 230),
+              splashBorderRadius: BorderRadius.circular(20),
+              automaticIndicatorColorAdjustment: false,
+              labelColor: const Color.fromARGB(200, 92, 225, 230),
+              unselectedLabelColor: const Color.fromARGB(255, 111, 8, 143),
+              controller: _controller,
+              labelPadding: const EdgeInsets.only(left: 5, right: 5),
+              tabs: const [
+                Tab(
+                  icon: Icon(
+                    Icons.all_inbox_sharp,
+                  ),
+                  text: 'All',
+                ),
+                Tab(
+                  icon: Icon(Icons.food_bank_outlined),
+                  text: 'Food',
+                ),
+                Tab(
+                  icon: Icon(Icons.medication),
+                  text: 'Medicine',
+                ),
+                Tab(
+                  icon: Icon(Icons.auto_fix_high),
+                  text: 'Beauty',
+                ),
+                Tab(
+                  icon: Icon(Icons.bloodtype),
+                  text: 'Donate',
+                ),
+              ],
             ),
           ),
-          Column(
-            children: [
-              SizedBox(
-                height: 500,
-                child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    // number of items per row
-                    crossAxisCount: 2,
-                    // vertical spacing between the items
-                    mainAxisSpacing: 10,
-                    // horizontal spacing between the items
-                    crossAxisSpacing: 10,
-                  ),
-                  children: products
-                      .map((product) => Card(
-                            elevation: 10,
-                            shadowColor:
-                                const Color.fromARGB(255, 92, 225, 230),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ProductPage()),
-                                  );
-                                },
-                                child: Column(
-                                  children: [
-                                    Image.network(
-                                      'http://192.168.0.101:3000//uploads//${product.productPicture}',
-                                      width: 120,
-                                      height: 120,
-                                    ),
-                                    Text(
-                                        '${product.product_name}-${product.category}'),
-                                    Text(
-                                        'EXP:${product.expiry_date.split('T')[0]}'),
-                                  ],
-                                )),
-                          ))
-                      .toList(),
-                ),
-              )
-            ],
+          SizedBox(
+            height: 450,
+            child: TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                CategoryPage(category: 'all'),
+                CategoryPage(category: 'food'),
+                CategoryPage(category: 'medicine'),
+                CategoryPage(category: 'beauty'),
+                CategoryPage(category: 'donate'),
+              ],
+            ),
           ),
         ],
       ),
