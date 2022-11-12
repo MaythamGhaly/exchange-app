@@ -5,9 +5,12 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'components/customButton.dart';
 import 'components/smallTextField.dart';
+import '../services/rest_api.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+  var user;
+
+  EditProfile({super.key, required this.user});
 
   @override
   _EditProfileState createState() => _EditProfileState();
@@ -20,6 +23,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
+  var user;
   final _formKey = GlobalKey<FormState>();
   File? _image;
   Future getImage() async {
@@ -33,6 +37,14 @@ class _EditProfileState extends State<EditProfile> {
     setState(() {
       this._image = ImageTemporary;
     });
+  }
+
+  @override
+  void initState() {
+    user = widget.user;
+    _firstNameController.text = user['first_name'];
+    _lastNameController.text = user['last_name'];
+    super.initState();
   }
 
   @override
@@ -54,107 +66,88 @@ class _EditProfileState extends State<EditProfile> {
             color: Color.fromARGB(255, 111, 8, 143),
           )),
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(top: 30),
-                child: Column(children: [
-                  Center(
-                      child: _image != null
-                          ? CircleAvatar(
-                              backgroundColor: Colors.black,
-                              backgroundImage: Image.file(
-                                _image!,
-                              ).image,
-                              radius: 80.0,
-                            )
-                          : CircleAvatar(
-                              backgroundColor: Colors.black,
-                              backgroundImage: Image.asset(
-                                'assets/profile.jpg',
-                              ).image,
-                              radius: 80.0,
-                            )),
-                  // ClipRRect(
-                  //     borderRadius: BorderRadius.circular(100),
-                  //     child: _image != null
-                  //         ? Image.file(
-                  //             _image!,
-                  //             height: 200,
-                  //             width: 200,
-                  //           )
-                  //         : Image.asset(
-                  //             'assets/profile.jpg',
-                  //             height: 200,
-                  //             width: 200,
-                  //           )
-                  // Image.asset(
-                  //   'assets/profile.jpg',
-                  //   width: 140,
-                  //   height: 145,
-                  // ),
-                  // ),
-                  IconButton(
-                      onPressed: getImage, icon: const Icon(Icons.add_a_photo)),
-                ]),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: SmallTextForm.customText(
-                      context,
-                      'First Name',
-                      'enter your first name',
-                      _firstNameController,
+        child: user == null
+            ? Center(child: CircularProgressIndicator())
+            : Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: Column(children: [
+                        Center(
+                            child: _image != null
+                                ? CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    backgroundImage: Image.file(
+                                      _image!,
+                                    ).image,
+                                    radius: 80.0,
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    backgroundImage: Image.network(
+                                      'http://192.168.137.1:3000//uploads//${user['profilePicture']}',
+                                    ).image,
+                                    radius: 80.0,
+                                  )),
+                        IconButton(
+                            onPressed: getImage,
+                            icon: const Icon(Icons.add_a_photo)),
+                      ]),
                     ),
-                  ),
-                  Expanded(
-                    child: SmallTextForm.customText(
-                      context,
-                      'Last Name',
-                      'enter your last name',
-                      _lastNameController,
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: SmallTextForm.customText(
+                            context,
+                            'first name',
+                            'enter your first name',
+                            _firstNameController,
+                          ),
+                        ),
+                        Expanded(
+                          child: SmallTextForm.customText(
+                            context,
+                            'Last Name',
+                            'enter your last name',
+                            _lastNameController,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    CustomTextForm.customText(
+                        context,
+                        'Password (not required)',
+                        'Enter your password',
+                        _passwordController,
+                        true,
+                        _passwordController,
+                        true),
+                    CustomTextForm.customText(
+                        context,
+                        'Confirm Password',
+                        'Enter your password',
+                        _confirmPasswordController,
+                        true,
+                        _passwordController,
+                        true),
+                    CustomButton(
+                      inputText: 'Save',
+                      onpressed: () {
+                        ApiService.editProfile(
+                          _firstNameController.text,
+                          _lastNameController.text,
+                          _passwordController.text,
+                          _passwordController.text,
+                          _image,
+                          context,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-              CustomTextForm.customText(context, 'Email', 'Enter your email',
-                  _emailController, false, _passwordController, false),
-              CustomTextForm.customText(
-                  context,
-                  'Password',
-                  'Enter your password',
-                  _passwordController,
-                  true,
-                  _passwordController,
-                  true),
-              CustomTextForm.customText(
-                  context,
-                  'Confirm Password',
-                  'Enter your password',
-                  _confirmPasswordController,
-                  true,
-                  _passwordController,
-                  true),
-              CustomButton(
-                inputText: 'Save',
-                onpressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('yes')),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('no')),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

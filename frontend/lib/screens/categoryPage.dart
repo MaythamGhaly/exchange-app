@@ -26,7 +26,6 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getProductByCategory();
   }
@@ -66,7 +65,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 child: Column(
                                   children: [
                                     Image.network(
-                                      'http://192.168.1.12:3000//uploads//${product['productPicture']}',
+                                      'http://192.168.137.1:3000//uploads//${product['productPicture']}',
                                       width: 120,
                                       height: 120,
                                     ),
