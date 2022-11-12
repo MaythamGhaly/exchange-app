@@ -61,6 +61,12 @@ const getProductById = async (req, res) => {
     const product = await Product.findById(id).populate('user');
     return res.send(product)
 }
+// api to get products by id
+const getUser = async (req, res) => {
+    id = req.user._id;
+    const user = await User.findById(id);
+    return res.send(user)
+}
 //  api to add to favorites
 const addFavorite = async (req, res) => {
     id = req.user._id;
@@ -113,5 +119,6 @@ module.exports = {
     getFavorites,
     getProductById,
     dealDone,
-    upload
+    upload,
+    getUser
 }
