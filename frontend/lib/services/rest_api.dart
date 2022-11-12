@@ -45,7 +45,7 @@ class ApiService {
     });
     try {
       var response = await http.post(
-          Uri.parse("http://192.168.1.12:3000/auth/login"),
+          Uri.parse("http://192.168.137.1:3000/auth/login"),
           headers: headers,
           body: msg);
       jsonData = json.decode(response.body);
@@ -58,10 +58,6 @@ class ApiService {
         showSnackBar(context, "Login Success");
         sharedPreferences.setString("token", jsonData['token']);
         return true;
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => HomeController()),
-        // );
       } else {
         showSnackBar(context, "Login Failed");
         return false;
@@ -72,12 +68,26 @@ class ApiService {
     }
   }
 
+  static getUserr() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-user'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    print(data);
+    return data;
+  }
+
   static getProductByCategory(category) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var response = await http.get(
         Uri.parse(
-            'http://192.168.1.12:3000/get-products-by-category/${category}'),
+            'http://192.168.137.1:3000/get-products-by-category/${category}'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -85,6 +95,38 @@ class ApiService {
         });
     var data = json.decode(response.body);
     return data;
+  }
+
+  static Future editProfile(first_name, last_name, password, confirm_password,
+      image, BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    final msg = jsonEncode({
+      "first_name": first_name,
+      "last_name": last_name,
+      "password": password,
+      "confirm_password": confirm_password,
+      "profilePicture": image
+    });
+    try {
+      var response =
+          await http.post(Uri.parse('http://192.168.137.1:3000/edit-Profile'),
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer $token',
+              },
+              body: msg);
+      var jsonData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        showSnackBar(context, "Edit Success");
+      } else {
+        showSnackBar(context, "Edit Failed");
+      }
+    } catch (e) {
+      print(e);
+      showSnackBar(context, "Edit Failed");
+    }
   }
 
   // static Future<List<NotAvailableDate>> GetException() async {

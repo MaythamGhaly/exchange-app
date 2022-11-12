@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:frontend/screens/components/CustomCategoryButton.dart';
 import 'package:frontend/screens/productsPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
