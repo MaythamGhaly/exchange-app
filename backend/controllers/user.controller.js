@@ -47,13 +47,13 @@ const addProduct = async (req, res) => {
 }
 // api to get all products
 const getAllProduct = async (req, res) => {
-    const product = await Product.find({ approved: true, deal_done: false });
-    return res.send(product)
+    const product = await Product.find({ approved: true, deal_done: false }).populate('user');
+    return res.send({product})
 }
 // api to get products by category
 const getProductByCategory = async (req, res) => {
-    const { category } = req.body;
-    const product = await Product.find({ 'category': category, approved: true, deal_done: false });
+    const { category } = req.params;
+    const product = await Product.find({ 'category': category, approved: true, deal_done: false }).populate('user');
     return res.send(product)
 }
 // api to get products by id

@@ -6,7 +6,7 @@ const { addProduct, editProfile, getAllProduct, getProductByCategory, addFavorit
 router.post('/add-Product',upload.single('productPicture'), authMiddleware, addProduct);
 router.post('/edit-Profile', upload.single('profilePicture') , authMiddleware, editProfile);
 router.get('/get-all-products', authMiddleware, getAllProduct);
-router.post('/get-products-by-category', authMiddleware, getProductByCategory);
+router.get('/get-products-by-category/:category', authMiddleware, getProductByCategory);
 router.post('/add-to-Favorite', authMiddleware, addFavorite);
 router.get('/get-favorites', authMiddleware, getFavorites);
 router.get('/get-product-by-id/:id', authMiddleware, getProductById);
