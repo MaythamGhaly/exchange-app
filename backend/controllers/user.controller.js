@@ -45,14 +45,13 @@ const addProduct = async (req, res) => {
 
     return res.send(userById);
 }
-// api to get all products
-const getAllProduct = async (req, res) => {
-    const product = await Product.find({ approved: true, deal_done: false }).populate('user');
-    return res.send({product})
-}
 // api to get products by category
 const getProductByCategory = async (req, res) => {
     const { category } = req.params;
+    if (category === 'all') {
+        const product = await Product.find({ approved: true, deal_done: false }).populate('user');
+        return res.send( product )
+    }
     const product = await Product.find({ 'category': category, approved: true, deal_done: false }).populate('user');
     return res.send(product)
 }
@@ -109,7 +108,6 @@ const dealDone = async (req, res) => {
 module.exports = {
     addProduct,
     editProfile,
-    getAllProduct,
     getProductByCategory,
     addFavorite,
     getFavorites,
