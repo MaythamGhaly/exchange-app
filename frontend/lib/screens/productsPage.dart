@@ -48,7 +48,7 @@ class _ProductPageState extends State<ProductPage> {
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.topLeft,
                   child: Image.network(
-                    'http://192.168.1.12:3000//uploads//${product['productPicture']}',
+                    'http://192.168.137.1:3000//uploads//${product['productPicture']}',
                     width: MediaQuery.of(context).size.width,
                     height: 200,
                   ),
@@ -130,7 +130,7 @@ class _ProductPageState extends State<ProductPage> {
                   CircleAvatar(
                     backgroundColor: Colors.black,
                     backgroundImage: Image.network(
-                      'http://192.168.1.12:3000//uploads//${product['user']['profilePicture']}',
+                      'http://192.168.137.1:3000//uploads//${product['user']['profilePicture']}',
                     ).image,
                     radius: 20.0,
                   ),
