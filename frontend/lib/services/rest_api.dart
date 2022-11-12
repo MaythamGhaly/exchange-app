@@ -32,7 +32,7 @@ class ApiService {
     );
   }
 
-  static Future<bool> signin(User user, BuildContext context) async {
+  static Future<bool> signin(email, password, BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var jsonData;
     var headers = {
@@ -40,12 +40,12 @@ class ApiService {
       'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
     };
     final msg = jsonEncode({
-      "email": user.email,
-      "password": user.password,
+      "email": email,
+      "password": password,
     });
     try {
       var response = await http.post(
-          Uri.parse("http://192.168.0.101:3000/auth/login"),
+          Uri.parse("http://192.168.1.12:3000/auth/login"),
           headers: headers,
           body: msg);
       jsonData = json.decode(response.body);
@@ -72,22 +72,21 @@ class ApiService {
     }
   }
 
-  static Future<List<Product>> getProduct() async {
+  static getProductByCategory(category) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
-    var response = await http
-        .get(Uri.parse('http://192.168.0.101:3000/get-all-products'), headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    Iterable l = json.decode(response.body);
-    List<Product> data =
-        List<Product>.from(l.map((model) => Product.fromJson(model)));
-    // List<Product> data = json.decode(response.body) as List<Product>;
-    print(data);
+    var response = await http.get(
+        Uri.parse(
+            'http://192.168.1.12:3000/get-products-by-category/${category}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    var data = json.decode(response.body);
     return data;
   }
+
   // static Future<List<NotAvailableDate>> GetException() async {
   //   String finalUrl;
   //   await getStringValuesSF().then((value) {
