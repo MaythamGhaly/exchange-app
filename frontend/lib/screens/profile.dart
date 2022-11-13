@@ -35,7 +35,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   getUser() async {
     var data = await ApiService.getUserr();
-    print(data);
     setState(() {
       user = data;
     });
@@ -52,7 +51,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: user == null
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(top: 30),

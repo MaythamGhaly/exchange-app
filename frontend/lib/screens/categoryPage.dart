@@ -34,7 +34,8 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.only(top: 10),
           height: 400,
           child: products.length > 0
               ? GridView(

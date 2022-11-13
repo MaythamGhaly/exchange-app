@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/adminPage.dart';
 import 'package:frontend/screens/models/product.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../screens/basePage.dart';
 import '../screens/home.dart';
 import '../screens/models/user.dart';
 
@@ -32,7 +34,7 @@ class ApiService {
     );
   }
 
-  static Future<bool> signin(email, password, BuildContext context) async {
+  static Future signin(email, password, BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var jsonData;
     var headers = {
@@ -51,13 +53,23 @@ class ApiService {
       jsonData = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        if (jsonData['success'] == "false") {
-          showSnackBar(context, jsonData['message']);
-          return false;
-        }
+        // ignore: use_build_context_synchronously
         showSnackBar(context, "Login Success");
         sharedPreferences.setString("token", jsonData['token']);
-        return true;
+        if (jsonData['user']['type'] == 'User') {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyStatefulWidget()),
+          );
+        }
+        if (jsonData['user']['type'] == 'Admin') {
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const adminPage()),
+          );
+        }
       } else {
         showSnackBar(context, "Login Failed");
         return false;
@@ -78,7 +90,6 @@ class ApiService {
       'Authorization': 'Bearer $token',
     });
     var data = json.decode(response.body);
-    print(data);
     return data;
   }
 
