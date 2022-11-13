@@ -110,18 +110,7 @@ class _LoginState extends State<Login> {
                   inputText: 'Login',
                   onpressed: () {
                     ApiService.signin(_emailController.text,
-                            _passwordController.text, context)
-                        .then((value) => {
-                              if (value == true)
-                                {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MyStatefulWidget()),
-                                  )
-                                }
-                            });
+                        _passwordController.text, context);
                   }),
 
               // if (_formKey.currentState!.validate()) {
