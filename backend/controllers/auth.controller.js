@@ -10,8 +10,9 @@ const login = async (req, res)=>{
     if(user.banned === true) return res.status(400).json({message: "you are banned from the admin"});
 
     
-
-    const isMatch = bcrypt.compare(password, user.password);
+    
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(isMatch,password, user.password);
     if(!isMatch) return res.status(404).json({message: "Invalid Credentials"});
 
     const token = jwt.sign({email: user.email, name: user.name}, process.env.JWT_SECRET_KEY, {
