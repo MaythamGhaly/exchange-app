@@ -5,7 +5,7 @@ import 'package:frontend/screens/profile.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/dark_theme_provider.dart';
-import 'components/customButton.dart';
+import '../components/customButton.dart';
 import 'login.dart';
 import 'mainChatsPage.dart';
 

@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/adminPage.dart';
-import 'package:frontend/screens/models/product.dart';
+import 'package:frontend/screens/login.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/basePage.dart';
 import '../screens/home.dart';
-import '../screens/models/user.dart';
 
 class ApiService {
   // static Future<String> getStringValuesSF() async {
@@ -77,6 +76,41 @@ class ApiService {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  static Future signUp(first_name, last_name, email, password, confirm_pass,
+      BuildContext context) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'authorization': 'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
+    };
+    final msg = jsonEncode({
+      "first_name": first_name,
+      "last_name": last_name,
+      "email": email,
+      "password": password,
+      "confirm_pass": confirm_pass
+    });
+    try {
+      var response = await http.post(
+          Uri.parse("http://192.168.137.1:3000/auth/signup"),
+          headers: headers,
+          body: msg);
+      print(response.body);
+      if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
+        showSnackBar(context, "Register Success");
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Login()),
+        );
+      } else {
+        showSnackBar(context, "register Failed");
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

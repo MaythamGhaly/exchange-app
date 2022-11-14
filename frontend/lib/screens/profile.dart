@@ -3,8 +3,8 @@ import 'package:frontend/screens/login.dart';
 
 import '../services/rest_api.dart';
 import 'chatingPage.dart';
-import 'components/customButton.dart';
-import 'components/uploadPost.dart';
+import '../components/customButton.dart';
+import '../components/uploadPost.dart';
 import 'editProfile.dart';
 
 class Profile extends StatefulWidget {

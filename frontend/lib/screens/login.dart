@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/provider/dark_theme_provider.dart';
-import 'package:frontend/screens/components/customTextForm.dart';
+import 'package:frontend/components/customTextForm.dart';
 import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/editProfile.dart';
 import 'package:frontend/screens/register.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/rest_api.dart';
-import 'components/customButton.dart';
+import '../components/customButton.dart';
 import 'package:http/http.dart' as http;
 
 import 'home.dart';
@@ -109,20 +109,11 @@ class _LoginState extends State<Login> {
               CustomButton(
                   inputText: 'Login',
                   onpressed: () {
-                    ApiService.signin(_emailController.text,
-                        _passwordController.text, context);
+                    if (_formKey.currentState!.validate()) {
+                      ApiService.signin(_emailController.text,
+                          _passwordController.text, context);
+                    }
                   }),
-
-              // if (_formKey.currentState!.validate()) {
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     const SnackBar(content: Text('Processing Data')),
-              //   );
-              // } else {
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     const SnackBar(content: Text('Processing')),
-              //   );
-              // }
-
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(

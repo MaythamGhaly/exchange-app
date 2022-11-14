@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
-import 'package:frontend/screens/components/customTextForm.dart';
+import 'package:frontend/components/customTextForm.dart';
+import 'package:frontend/screens/login.dart';
+import 'package:frontend/services/rest_api.dart';
 
-import 'components/customButton.dart';
-import 'components/smallTextField.dart';
+import '../components/customButton.dart';
+import '../components/smallTextField.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -122,15 +124,26 @@ class _RegisterState extends State<Register> {
                 inputText: 'Register',
                 onpressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('yes')),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('no')),
-                    );
+                    ApiService.signUp(
+                        _firstNameController.text,
+                        _lastNameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                        _confirmPasswordController.text,
+                        context);
                   }
                 },
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+                child: const Text(
+                  "Already have an account? Login",
+                ),
               ),
             ],
           ),

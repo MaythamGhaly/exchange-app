@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/components/customButton.dart';
+import 'package:frontend/components/customButton.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 

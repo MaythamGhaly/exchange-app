@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/components/customButton.dart';
+import 'package:frontend/components/customButton.dart';
 
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {

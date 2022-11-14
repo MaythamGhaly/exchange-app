@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/provider/dark_theme_provider.dart';
-import 'package:frontend/screens/components/customMessageCard.dart';
-import 'package:frontend/screens/components/customTextForm.dart';
+import 'package:frontend/components/customMessageCard.dart';
+import 'package:frontend/components/customTextForm.dart';
 import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/register.dart';
 import 'package:provider/provider.dart';
-import 'components/customButton.dart';
-import 'components/customMessageReplyCard.dart';
+import '../components/customButton.dart';
+import '../components/customMessageReplyCard.dart';
 
 class ChatingPage extends StatefulWidget {
   const ChatingPage({super.key});
