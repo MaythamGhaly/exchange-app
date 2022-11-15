@@ -55,6 +55,7 @@ class ApiService {
         // ignore: use_build_context_synchronously
         showSnackBar(context, "Login Success");
         sharedPreferences.setString("token", jsonData['token']);
+        sharedPreferences.setString("user_id", jsonData['user']['_id']);
         if (jsonData['user']['type'] == 'User') {
           // ignore: use_build_context_synchronously
           Navigator.push(
