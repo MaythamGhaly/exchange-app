@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class messageCard extends StatelessWidget {
+  final String message;
+
+  const messageCard({Key? key, required this.message}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -19,11 +22,11 @@ class messageCard extends StatelessWidget {
             child: Stack(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                       left: 10.0, top: 10.0, right: 50.0, bottom: 10.0),
-                  child: Text("Hello",
-                      style: TextStyle(
+                  child: Text(message,
+                      style: const TextStyle(
                         fontSize: 16,
                       )),
                 ),
