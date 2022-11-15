@@ -27,12 +27,12 @@ const userSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        required: 'type is required',
+        default: 'User',
         enum: ['Admin', 'User']
     },
     profilePicture: {
         type: String,
-        required: false,
+        default: "profile.jpg",
     },
     banned: {
         type: Boolean,
