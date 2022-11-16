@@ -11,6 +11,8 @@ import '../components/customButton.dart';
 import '../components/customMessageReplyCard.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import '../services/rest_api.dart';
+
 class ChatingPage extends StatefulWidget {
   var client;
 
@@ -24,10 +26,13 @@ class ChatingPage extends StatefulWidget {
 class _ChatingPageState extends State<ChatingPage> {
   TextEditingController _messageController = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  List masseges = [];
+  List messages = [];
   late IO.Socket socket;
   var client;
+
   Future<void> connect() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var senderId = sharedPreferences.getString("user_id");
     socket = IO.io(
         'http://192.168.137.1:3000',
         IO.OptionBuilder()
@@ -35,6 +40,7 @@ class _ChatingPageState extends State<ChatingPage> {
             .disableAutoConnect()
             .build());
     socket.connect();
+    socket.emit("signin", (senderId));
     setUpSocketListener();
   }
 
@@ -48,24 +54,38 @@ class _ChatingPageState extends State<ChatingPage> {
       "message": message
     };
     socket.emit("message", dataJson);
-    setMassege(dataJson);
+    setMessage(dataJson);
   }
 
   void setUpSocketListener() {
     socket.on("message-receive", (data) {
-      setMassege(data);
+      if (data != null) {
+        setMessage(data);
+      }
     });
   }
 
-  void setMassege(var massege) {
+  void setMessage(var message) {
     setState(() {
-      masseges.add(massege);
+      messages.add(message);
     });
+  }
+
+  void getMessages(client) async {
+    var chats = await ApiService.findOrAddRoom(client['user']['_id']);
+    if (chats['messages'] != null) {
+      chats['messages'].map((chat) {
+        setState(() {
+          messages.add(chat);
+        });
+      }).toList();
+    }
   }
 
   @override
   void initState() {
     connect();
+    getMessages(widget.client);
     super.initState();
   }
 
@@ -97,16 +117,16 @@ class _ChatingPageState extends State<ChatingPage> {
                 child: ListView.builder(
                     shrinkWrap: true,
                     controller: _scrollController,
-                    itemCount: masseges.length,
+                    itemCount: messages.length,
                     itemBuilder: (context, index) {
-                      if (masseges[index]['receiver'] ==
+                      if (messages[index]['receiver'] ==
                           widget.client['user']['_id']) {
-                        return messageCard(message: masseges[index]['message']);
+                        return messageCard(message: messages[index]['message']);
                       }
-                      if (masseges[index]['sender'] ==
+                      if (messages[index]['sender'] ==
                           widget.client['user']['_id']) {
                         return replyMessageCard(
-                            message: masseges[index]['message']);
+                            message: messages[index]['message']);
                       } else {
                         return Container();
                       }
@@ -156,14 +176,18 @@ class _ChatingPageState extends State<ChatingPage> {
                                   Icons.send,
                                   color: Color.fromARGB(200, 92, 225, 230),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   _scrollController.animateTo(
                                     _scrollController.position.maxScrollExtent,
                                     curve: Curves.easeOut,
                                     duration: Duration(milliseconds: 300),
                                   );
+                                  print(widget.client['user']['_id']);
                                   sendMessage(_messageController.text,
                                       widget.client['user']['_id']);
+                                  await ApiService.sendMessage(
+                                      widget.client['user']['_id'],
+                                      _messageController.text);
                                   _messageController.clear();
                                 },
                               ),
