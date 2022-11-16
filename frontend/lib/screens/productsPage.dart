@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/categoryPage.dart';
 import 'package:frontend/screens/login.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/rest_api.dart';
 import 'chatingPage.dart';
@@ -26,6 +30,14 @@ class _ProductPageState extends State<ProductPage> {
       products = data;
     });
   }
+
+  // Future getUserId() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   var userId = sharedPreferences.getString("user_id");
+  //   setState(() {
+  //     userId = userId;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -149,14 +161,18 @@ class _ProductPageState extends State<ProductPage> {
                 margin: const EdgeInsets.only(
                   top: 25,
                 ),
-                child: Center(
+                child:
+                    // product['user']['last_name'] == widget.userId ?
+                    Center(
                   child: CustomButton(
                     inputText: "Start Exchange",
-                    onpressed: () {
+                    onpressed: () async {
+                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ChatingPage()),
+                            builder: (context) =>
+                                ChatingPage(client: product)),
                       );
                     },
                   ),

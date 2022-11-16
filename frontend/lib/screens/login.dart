@@ -112,6 +112,8 @@ class _LoginState extends State<Login> {
                     if (_formKey.currentState!.validate()) {
                       ApiService.signin(_emailController.text,
                           _passwordController.text, context);
+                      _emailController.clear();
+                      _passwordController.clear();
                     }
                   }),
               TextButton(
