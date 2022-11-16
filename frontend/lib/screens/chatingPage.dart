@@ -14,9 +14,9 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../services/rest_api.dart';
 
 class ChatingPage extends StatefulWidget {
-  var client;
+  var userId;
 
-  ChatingPage({super.key, required this.client});
+  ChatingPage({super.key, required this.userId});
   // ignore: prefer_typing_uninitialized_variables
 
   @override
@@ -28,7 +28,7 @@ class _ChatingPageState extends State<ChatingPage> {
   ScrollController _scrollController = ScrollController();
   List messages = [];
   late IO.Socket socket;
-  var client;
+  var userId;
 
   Future<void> connect() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -54,14 +54,18 @@ class _ChatingPageState extends State<ChatingPage> {
       "message": message
     };
     socket.emit("message", dataJson);
-    setMessage(dataJson);
+    if (dataJson != null) {
+      setMessage(dataJson);
+    }
+    return;
   }
 
   void setUpSocketListener() {
     socket.on("message-receive", (data) {
-      if (data != null) {
-        setMessage(data);
+      if (data['message'] == null) {
+        return;
       }
+      setMessage(data);
     });
   }
 
@@ -71,8 +75,9 @@ class _ChatingPageState extends State<ChatingPage> {
     });
   }
 
-  void getMessages(client) async {
-    var chats = await ApiService.findOrAddRoom(client['user']['_id']);
+  void getMessages(userId) async {
+    print(userId);
+    var chats = await ApiService.findOrAddRoom(userId);
     if (chats['messages'] != null) {
       chats['messages'].map((chat) {
         setState(() {
@@ -85,7 +90,7 @@ class _ChatingPageState extends State<ChatingPage> {
   @override
   void initState() {
     connect();
-    getMessages(widget.client);
+    getMessages(widget.userId);
     super.initState();
   }
 
@@ -119,14 +124,19 @@ class _ChatingPageState extends State<ChatingPage> {
                     controller: _scrollController,
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
-                      if (messages[index]['receiver'] ==
-                          widget.client['user']['_id']) {
-                        return messageCard(message: messages[index]['message']);
+                      if (messages[index]['receiver'] == widget.userId) {
+                        if (messages[index]['message'] != null) {
+                          return messageCard(
+                              message: messages[index]['message']);
+                        }
+                        return Container();
                       }
-                      if (messages[index]['sender'] ==
-                          widget.client['user']['_id']) {
-                        return replyMessageCard(
-                            message: messages[index]['message']);
+                      if (messages[index]['sender'] == widget.userId) {
+                        if (messages[index]['message'] != null) {
+                          return replyMessageCard(
+                              message: messages[index]['message']);
+                        }
+                        return Container();
                       } else {
                         return Container();
                       }
@@ -182,12 +192,11 @@ class _ChatingPageState extends State<ChatingPage> {
                                     curve: Curves.easeOut,
                                     duration: Duration(milliseconds: 300),
                                   );
-                                  print(widget.client['user']['_id']);
-                                  sendMessage(_messageController.text,
-                                      widget.client['user']['_id']);
+                                  print(widget.userId);
+                                  sendMessage(
+                                      _messageController.text, widget.userId);
                                   await ApiService.sendMessage(
-                                      widget.client['user']['_id'],
-                                      _messageController.text);
+                                      widget.userId, _messageController.text);
                                   _messageController.clear();
                                 },
                               ),
