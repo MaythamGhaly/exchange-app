@@ -175,6 +175,45 @@ class ApiService {
     }
   }
 
+  static findOrAddRoom(receiver) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var data = jsonEncode({
+      "receiver": receiver,
+      "sender": sharedPreferences.getString("user_id"),
+    });
+    var response =
+        await http.post(Uri.parse('http://192.168.137.1:3000/find-create-room'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+            body: data);
+    var res = json.decode(response.body);
+    return res;
+  }
+
+  static sendMessage(receiver, message) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var data = jsonEncode({
+      "receiver": receiver,
+      "sender": sharedPreferences.getString("user_id"),
+      "message": message
+    });
+    var response =
+        await http.post(Uri.parse('http://192.168.137.1:3000/add-chat'),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+            body: data);
+    var res = json.decode(response.body);
+    return res;
+  }
+
   // static Future<List<NotAvailableDate>> GetException() async {
   //   String finalUrl;
   //   await getStringValuesSF().then((value) {
