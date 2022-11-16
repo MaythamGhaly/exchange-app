@@ -1,66 +1,107 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/login.dart';
+import 'package:frontend/services/rest_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chatingPage.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
+  @override
+  _CustomCardState createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
   List test = [
     {"name": "test1", "lastChat": "hello"},
     {"name": "test2", "lastChat": "hey"},
   ];
 
+  List userInformation = [];
+
+  void getrooms() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var senderId = sharedPreferences.getString("user_id");
+    var room = await ApiService.getRooms();
+    for (var i = 0; i < room.length; i++) {
+      if (room[i]['user1']['_id'] == senderId) {
+        setState(() {
+          userInformation.add(room[i]['user2']);
+        });
+      } else {
+        setState(() {
+          userInformation.add(room[i]['user1']);
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    getrooms();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (contex) => ChatingPage(client: null)));
-      },
-      child: Column(
-        children: [
-          ListTile(
-            leading: const CircleAvatar(
-              radius: 30,
-              // child: SvgPicture.asset(
-              //   chatModel.isGroup ? "assets/groups.svg" : "assets/person.svg",
-              //   color: Colors.white,
-              //   height: 36,
-              //   width: 36,
-              // ),
-              backgroundColor: Colors.blueGrey,
-            ),
-            title: const Text(
-              "Maytham",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Row(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const Icon(Icons.done_all),
-                const SizedBox(
-                  width: 3,
-                ),
-                const Text(
-                  "hello",
-                  style: TextStyle(
-                    fontSize: 13,
+    return Column(
+      children: [
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: 10),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width - 40,
+            child: userInformation.length > 0
+                ? Container(
+                    child: ListView(
+                      children: userInformation
+                          .map(
+                            (info) => Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChatingPage(userId: info['_id'])),
+                                    );
+                                  },
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.blueGrey,
+                                      backgroundImage: Image.network(
+                                        'http://192.168.137.1:3000//uploads//${info['profilePicture']}',
+                                      ).image,
+                                    ),
+                                    title: Text(
+                                      '${info['first_name']} ${info['last_name']}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      right: 20, left: 20, top: 5, bottom: 5),
+                                  child: Divider(
+                                    thickness: 1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                : const Center(
+                    child: Text("No Chats"),
                   ),
-                ),
-              ],
-            ),
-            trailing: const Text("8:30"),
           ),
-          const Padding(
-            padding: EdgeInsets.only(right: 20, left: 80),
-            child: Divider(
-              thickness: 1,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
