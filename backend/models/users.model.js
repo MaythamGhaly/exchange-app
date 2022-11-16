@@ -43,7 +43,10 @@ const userSchema = new mongoose.Schema({
         {type: mongoose.Schema.Types.ObjectId,ref:'Product'}
     ],
     favorites: 
-        {type: mongoose.Schema.Types.ObjectId,ref:'Favorite'}
+        {type: mongoose.Schema.Types.ObjectId,ref:'Favorite'},
+        
+    chats: 
+        {type: mongoose.Schema.Types.ObjectId,ref:'Chat'}
     
 })
 
