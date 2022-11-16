@@ -166,13 +166,12 @@ class _ProductPageState extends State<ProductPage> {
                     Center(
                   child: CustomButton(
                     inputText: "Start Exchange",
-                    onpressed: () async {
-                      
+                    onpressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ChatingPage(client: product)),
+                                ChatingPage(userId: product['user']['_id'])),
                       );
                     },
                   ),

@@ -214,6 +214,19 @@ class ApiService {
     return res;
   }
 
+  static getRooms() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-rooms'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
+
   // static Future<List<NotAvailableDate>> GetException() async {
   //   String finalUrl;
   //   await getStringValuesSF().then((value) {
