@@ -1,6 +1,8 @@
 const User = require('../models/users.model');
 const Product = require('../models/products.model');
 const Favorite = require('../models/favorites.model');
+const Chat = require('../models/chats.model');
+
 const multer = require('multer');
 
 // function to upload image in the public folder
@@ -110,6 +112,53 @@ const dealDone = async (req, res) => {
     return res.send({ 'status': "success" })
 }
 
+const findOneOrCreat = async (req, res) => {
+    
+    const { receiver , sender } = req.body;
+    const room = await Chat.findOne({ $or : [{ user1 : receiver , user2 : sender } , { user1 : sender , user2 : receiver }]});
+    if(!room){
+        const addRoom = await Chat.create({
+            user1: receiver,
+            user2: sender,
+        });
+        
+        await addRoom.save();
+        return res.send({ message: "room added" });
+    }
+    return res.json(room);
+    
+}
+
+const getRooms = async (req, res) => {
+    
+    id = req.user._id;
+    const room = await Chat.find({ $or : [{ user1 : id } , { user2 : id }]}).populate('user1').populate('user2');
+    
+    return res.send(room);
+}
+
+const addChat = async (req, res) => {
+    
+    const { receiver , sender , message } = req.body;
+    console.log(req.body);
+    const chat = await Chat.findOne({ $or : [{ user1 : receiver , user2 : sender } , { user1 : sender , user2 : receiver }]});
+    chat.messages.push({
+        sender: sender,
+        receiver: receiver,
+        message: message
+    })
+        await chat.save();
+        return res.send({ message: "success" });
+}
+
+const getChat = async (req, res) => {
+    const { receiver , sender } = req.params;
+    const chat = await Chat.findOne({ sender,receiver });
+    return res.send(chat.messages);
+}
+
+
+
 // export all the functions
 module.exports = {
     addProduct,
@@ -120,5 +169,9 @@ module.exports = {
     getProductById,
     dealDone,
     upload,
-    getUser
+    getUser,
+    findOneOrCreat,
+    addChat,
+    getChat,
+    getRooms
 }

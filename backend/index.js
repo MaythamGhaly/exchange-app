@@ -26,18 +26,20 @@ app.use('/', AdminRoutes)
 
 app.use(express.static('public'));
 
-const connectedUsers = new Set();
+var clients = {};
 io.on('connection', (socket) => {
     console.log('Connected');
-    io.emit('connectedUsers', connectedUsers.size);
-    connectedUsers.add(socket.id);
+    socket.on("signin", (id) => {
+        console.log(id);
+        clients[id] = socket;
+    })
     socket.on('disconnect', () => {
         console.log('Disconnected');
-        connectedUsers.delete(socket.id);
+        
     });
     socket.on("message", (data) => {
-        console.log(data);
-        socket.broadcast.emit("message-receive", data);
+        let receiver = data.receiver;
+        if(clients[receiver]) clients[receiver].emit("message-receive", data);
         
     })
 });
