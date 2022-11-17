@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/adminPage.dart';
+import 'package:frontend/screens/adminScreen/adminPage.dart';
+import 'package:frontend/screens/adminScreen/usersSection.dart';
 import 'package:frontend/screens/login.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -227,6 +228,116 @@ class ApiService {
     return data;
   }
 
+  static getusers() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-all-users'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
+
+  static getUsersBanned() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-banned-users'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
+
+  static banUser(context, userId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/ban-user/${userId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "User are banned");
+    }
+    showSnackBar(context, "User banned failed");
+    return false;
+  }
+
+  static removeBan(context, userId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/remove-ban/${userId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "ban are removed");
+      return true;
+    }
+    showSnackBar(context, "Remove ban failed");
+    return false;
+  }
+
+  static getPosts() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-posts'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    print(data);
+    return data;
+  }
+
+  static approvePost(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/approved/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "post are approved");
+      return true;
+    }
+    showSnackBar(context, "post approved failed");
+    return false;
+  }
+
+  static deletePost(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/delete-post/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "post are deleted");
+      return true;
+    }
+    showSnackBar(context, "post deleted failed");
+    return false;
+  }
   // static Future<List<NotAvailableDate>> GetException() async {
   //   String finalUrl;
   //   await getStringValuesSF().then((value) {
