@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontend/screens/adminScreen/bannedSection.dart';
+import 'package:frontend/screens/adminScreen/postsSection.dart';
+import 'package:frontend/screens/adminScreen/usersSection.dart';
 import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/profile.dart';
+import 'package:frontend/services/rest_api.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
-import '../components/customButton.dart';
-import 'login.dart';
-import 'mainChatsPage.dart';
+import '../../provider/dark_theme_provider.dart';
+import '../../components/customButton.dart';
+import '../login.dart';
+import '../mainChatsPage.dart';
 
 class adminPage extends StatefulWidget {
   const adminPage({super.key});
@@ -18,6 +22,15 @@ class adminPage extends StatefulWidget {
 
 class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
   late TabController _controller;
+  var users;
+
+  // Future getUsers() async {
+  //   var data = await ApiService.getusers();
+  //   setState(() {
+  //     users = data;
+  //   });
+  //   print(users);
+  // }
 
   @override
   void initState() {
@@ -124,75 +137,9 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _controller,
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    // child: SvgPicture.asset(
-                    //   chatModel.isGroup ? "assets/groups.svg" : "assets/person.svg",
-                    //   color: Colors.white,
-                    //   height: 36,
-                    //   width: 36,
-                    // ),
-                    backgroundColor: Colors.blueGrey,
-                  ),
-                  title: Text(
-                    "Maytham",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  trailing: Icon(Icons.block),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 20, left: 80),
-                  child: Divider(
-                    thickness: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    // child: SvgPicture.asset(
-                    //   chatModel.isGroup ? "assets/groups.svg" : "assets/person.svg",
-                    //   color: Colors.white,
-                    //   height: 36,
-                    //   width: 36,
-                    // ),
-                    backgroundColor: Colors.blueGrey,
-                  ),
-                  title: Text(
-                    "Maytham",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  trailing: Icon(Icons.remove_circle),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 20, left: 80),
-                  child: Divider(
-                    thickness: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          userSection(),
+          postsSections(),
+          bannedSection(),
         ],
       ),
     );
