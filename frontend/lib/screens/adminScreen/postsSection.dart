@@ -45,56 +45,59 @@ class _postsSectionsState extends State<postsSections> {
                     crossAxisSpacing: 10,
                   ),
                   children: products
-                      .map((product) => Card(
-                            elevation: 10,
-                            shadowColor:
-                                const Color.fromARGB(255, 92, 225, 230),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Column(
-                              children: [
-                                Image.network(
-                                  'http://192.168.137.1:3000//uploads//${product['productPicture']}',
-                                  width: 140,
-                                  height: 140,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Text(
-                                      '${product['product_name']}-${product['category']}'),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Text(
-                                      'EXP  : ${product['expiry_date'].split('T')[0]}'),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Text('${product['description']}'),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(0),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () async {
-                                      await ApiService.deletePost(
-                                          context, product['_id']);
-                                      getPosts();
-                                    },
+                      .map((product) => Container(
+                            padding: const EdgeInsets.only(right: 15, left: 15),
+                            child: Card(
+                              elevation: 10,
+                              shadowColor:
+                                  const Color.fromARGB(255, 92, 225, 230),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                children: [
+                                  Image.network(
+                                    'http://192.168.137.1:3000//uploads//${product['productPicture']}',
+                                    width: 140,
+                                    height: 140,
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(0),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.done),
-                                    onPressed: () async {
-                                      await ApiService.approvePost(
-                                          context, product['_id']);
-                                      getPosts();
-                                    },
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Text(
+                                        '${product['product_name']}-${product['category']}'),
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Text(
+                                        'EXP  : ${product['expiry_date'].split('T')[0]}'),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Text('${product['description']}'),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(0),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () async {
+                                        await ApiService.deletePost(
+                                            context, product['_id']);
+                                        getPosts();
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(0),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.done),
+                                      onPressed: () async {
+                                        await ApiService.approvePost(
+                                            context, product['_id']);
+                                        getPosts();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ))
                       .toList(),

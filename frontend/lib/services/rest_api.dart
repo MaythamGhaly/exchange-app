@@ -264,10 +264,7 @@ class ApiService {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         });
-    if (response.statusCode == 200) {
-      showSnackBar(context, "User are banned");
-    }
-    showSnackBar(context, "User banned failed");
+    showSnackBar(context, "User are banned");
     return false;
   }
 
