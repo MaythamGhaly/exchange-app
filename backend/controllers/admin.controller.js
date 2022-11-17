@@ -8,9 +8,14 @@ const approvedPost = async (req, res) => {
     })
 return res.send({'status': "success"})
 }
+const deletePost = async (req, res) => {
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
+return res.send({'status': "success"})
+}
 // api to get all users
 const getAllUsers = async (req, res) => {
-    const user = await User.find({ $where: "this.banned == false" });
+    const user = await User.find({ banned : "false" ,type: "User"});
     return res.send(user)
 }
 // api to ban a user
@@ -31,7 +36,11 @@ return res.send({'status': "success"})
 }
 // api to get banned users
 const getBannedUsers = async (req, res) => {
-    const user = await User.find({ $where: "this.banned == true" });
+    const user = await User.find({ banned : "true" });
+    return res.send(user)
+}
+const posts = async (req, res) => {
+    const user = await Product.find({ approved : "false" });
     return res.send(user)
 }
 //  export all functions
@@ -40,5 +49,7 @@ module.exports = {
     getAllUsers,
     getBannedUsers,
     banUser,
-    removeBan
+    removeBan,
+    posts,
+    deletePost
 }
