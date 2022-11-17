@@ -11,11 +11,6 @@ class CustomCard extends StatefulWidget {
 }
 
 class _CustomCardState extends State<CustomCard> {
-  List test = [
-    {"name": "test1", "lastChat": "hello"},
-    {"name": "test2", "lastChat": "hey"},
-  ];
-
   List userInformation = [];
 
   void getrooms() async {
