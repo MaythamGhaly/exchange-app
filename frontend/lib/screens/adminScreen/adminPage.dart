@@ -7,6 +7,7 @@ import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/profile.dart';
 import 'package:frontend/services/rest_api.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../provider/dark_theme_provider.dart';
 import '../../components/customButton.dart';
@@ -24,13 +25,10 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
   late TabController _controller;
   var users;
 
-  // Future getUsers() async {
-  //   var data = await ApiService.getusers();
-  //   setState(() {
-  //     users = data;
-  //   });
-  //   print(users);
-  // }
+  logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString("token", "");
+  }
 
   @override
   void initState() {
@@ -91,7 +89,7 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
                     ),
                   ),
                   const PopupMenuItem<int>(
-                    value: 2,
+                    value: 1,
                     child: Text("Logout"),
                   ),
                 ];
@@ -100,9 +98,11 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
                 if (value == 0) {
                   print("Switch theme is selected.");
                 } else if (value == 1) {
-                  Navigator.push(
+                  logout();
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const Login()),
+                    (Route<dynamic> route) => false,
                   );
                 }
               }),
