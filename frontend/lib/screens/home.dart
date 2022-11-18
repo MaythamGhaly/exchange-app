@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:frontend/screens/Search.dart';
 import 'package:frontend/screens/productsPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
@@ -17,6 +18,7 @@ class HomeController extends StatefulWidget {
 
 class _HomeControllerState extends State<HomeController>
     with TickerProviderStateMixin {
+  TextEditingController _searchController = TextEditingController();
   late TabController _controller;
   final _formKey = GlobalKey<FormState>();
 
@@ -66,34 +68,47 @@ class _HomeControllerState extends State<HomeController>
           ),
           Container(
             margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
-            child: Column(
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: TextFormField(
-                        cursorColor: Colors.grey,
-                        decoration: InputDecoration(
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50),
-                                borderSide: BorderSide.none),
-                            hintText: 'Search',
-                            hintStyle: const TextStyle(
-                                color: Colors.grey, fontSize: 18),
-                            prefixIcon: Container(
-                              padding: const EdgeInsets.all(15),
-                              width: 18,
-                              child: const Icon(
-                                Icons.search,
-                                color: Color.fromARGB(255, 151, 71, 255),
-                                size: 30,
-                              ),
-                            )),
-                      ),
+                Expanded(
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter a product name';
+                      }
+                    },
+                    controller: _searchController,
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50),
+                          borderSide: BorderSide.none),
+                      hintText: 'Search',
+                      hintStyle:
+                          const TextStyle(color: Colors.grey, fontSize: 18),
                     ),
-                  ],
-                )
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
+                      color: Color.fromARGB(255, 111, 8, 143),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => search(
+                                        product_name: _searchController.text,
+                                      )));
+                        }
+                      },
+                    ))
               ],
             ),
           ),
