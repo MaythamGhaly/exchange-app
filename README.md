@@ -43,11 +43,11 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 <h1 align="center">Mockup</h1>
 
 
-| Home (lightmode)    | Login(lightmode) | Home(lightmode) |ProductPage(lightmode)| 
+| Home (lightmode)    | Login(lightmode) | Chat(lightmode) |ProductPage(lightmode)| 
 | --------------------| -----------------|-----------------|----------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
 
-| Home (darkmode)    | Login(darkmode) | Home(darkmode) |ProductPage(darkmode)| 
+| Home (darkmode)    | Login(darkmode) | Chat(darkmode) |ProductPage(darkmode)| 
 | -------------------| ----------------|----------------|---------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
 
@@ -70,9 +70,13 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Uing the above mentioned tecch stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-<!-- | Landing  | Home/Search  |
-| -----------------| -----|
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) | -->
+| Home (lightmode)    | Login(lightmode) | Chat(lightmode) |ProductPage(lightmode)| 
+| --------------------| -----------------|-----------------|----------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/main%20chat%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20dark.jpg) |
+
+<!-- | Home (darkmode)    | Login(darkmode) | Chat(darkmode) |ProductPage(darkmode)| 
+| -------------------| ----------------|----------------|---------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) | -->
 
 
 <br><br>
