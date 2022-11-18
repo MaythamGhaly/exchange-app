@@ -39,6 +39,7 @@ const getBannedUsers = async (req, res) => {
     const user = await User.find({ banned : "true" });
     return res.send(user)
 }
+// api to get all posts
 const posts = async (req, res) => {
     const user = await Product.find({ approved : "false" });
     return res.send(user)

@@ -133,7 +133,7 @@ const dealDone = async (req, res) => {
     })
     return res.send({ 'status': "success" })
 }
-
+// api to find a room chat or creat one
 const findOneOrCreat = async (req, res) => {
 
     const { receiver, sender } = req.body;
@@ -150,7 +150,7 @@ const findOneOrCreat = async (req, res) => {
     return res.json(room);
 
 }
-
+// api to get all rooms chat by users id
 const getRooms = async (req, res) => {
 
     id = req.user._id;
@@ -158,7 +158,7 @@ const getRooms = async (req, res) => {
 
     return res.send(room);
 }
-
+// api to save message in db
 const addChat = async (req, res) => {
 
     const { receiver, sender, message } = req.body;
@@ -172,20 +172,18 @@ const addChat = async (req, res) => {
     await chat.save();
     return res.send({ message: "success" });
 }
-
+// api to get messages from db
 const getChat = async (req, res) => {
     const { receiver, sender } = req.params;
     const chat = await Chat.findOne({ sender, receiver });
     return res.send(chat.messages);
 }
-
+// api to search by product name
 const search = async (req, res) => {
     const { product_name } = req.params;
     const product = await Product.find({ product_name : product_name }).populate('user');
     return res.send(product);
 }
-
-
 
 // export all the functions
 module.exports = {
