@@ -63,19 +63,36 @@ class _CategoryPageState extends State<CategoryPage> {
                                             ProductPage(product: product)),
                                   );
                                 },
-                                child: Column(
-                                  children: [
-                                    Image.network(
-                                      'http://192.168.137.1:3000//uploads//${product['productPicture']}',
-                                      width: 120,
-                                      height: 120,
+                                child: Stack(children: [
+                                  Center(
+                                    child: Column(
+                                      children: [
+                                        Image.network(
+                                          'http://192.168.137.1:3000//uploads//${product['productPicture']}',
+                                          width: 120,
+                                          height: 120,
+                                        ),
+                                        Text(
+                                            '${product['product_name']}-${product['category']}'),
+                                        Text(
+                                            'EXP:${product['expiry_date'].split('T')[0]}'),
+                                      ],
                                     ),
-                                    Text(
-                                        '${product['product_name']}-${product['category']}'),
-                                    Text(
-                                        'EXP:${product['expiry_date'].split('T')[0]}'),
-                                  ],
-                                )),
+                                  ),
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: IconButton(
+                                      iconSize: 25,
+                                      icon: const Icon(Icons.favorite),
+                                      color: Color.fromARGB(255, 85, 20, 170),
+                                      onPressed: () async {
+                                        await ApiService.addFavorites(
+                                            context, product['_id']);
+                                      },
+                                    ),
+                                  ),
+                                ])),
                           ))
                       .toList(),
                 )

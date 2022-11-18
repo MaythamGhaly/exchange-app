@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/components/customTextForm.dart';
@@ -6,6 +8,7 @@ import 'dart:io';
 import '../components/customButton.dart';
 import '../components/smallTextField.dart';
 import '../services/rest_api.dart';
+import 'package:http/http.dart' as http;
 
 class EditProfile extends StatefulWidget {
   var user;
@@ -20,18 +23,21 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _previousPasswordController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
 
   var user;
   final _formKey = GlobalKey<FormState>();
   File? _image;
+
   Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (image == null) return null;
+    if (pickedFile == null) return null;
 
-    final ImageTemporary = File(image.path);
+    final ImageTemporary = File(pickedFile.path);
 
     print(ImageTemporary);
     setState(() {
@@ -66,88 +72,101 @@ class _EditProfileState extends State<EditProfile> {
             color: Color.fromARGB(255, 111, 8, 143),
           )),
       body: SingleChildScrollView(
-        child: user == null
-            ? Center(child: CircularProgressIndicator())
-            : Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      child: Column(children: [
-                        Center(
-                            child: _image != null
-                                ? CircleAvatar(
-                                    backgroundColor: Colors.black,
-                                    backgroundImage: Image.file(
-                                      _image!,
-                                    ).image,
-                                    radius: 80.0,
-                                  )
-                                : CircleAvatar(
-                                    backgroundColor: Colors.black,
-                                    backgroundImage: Image.network(
-                                      'http://192.168.137.1:3000//uploads//${user['profilePicture']}',
-                                    ).image,
-                                    radius: 80.0,
-                                  )),
-                        IconButton(
-                            onPressed: getImage,
-                            icon: const Icon(Icons.add_a_photo)),
-                      ]),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: SmallTextForm.customText(
-                            context,
-                            'first name',
-                            'enter your first name',
-                            _firstNameController,
+        child: SizedBox(
+          child: user == null
+              ? Center(child: CircularProgressIndicator())
+              : Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: Column(children: [
+                          Center(
+                              child: _image != null
+                                  ? CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                      backgroundImage: Image.file(
+                                        _image!,
+                                      ).image,
+                                      radius: 80.0,
+                                    )
+                                  : CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                      backgroundImage: Image.network(
+                                        'http://192.168.137.1:3000//uploads//${user['profilePicture']}',
+                                      ).image,
+                                      radius: 80.0,
+                                    )),
+                          IconButton(
+                              onPressed: getImage,
+                              icon: const Icon(Icons.add_a_photo)),
+                        ]),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: SmallTextForm.customText(
+                              context,
+                              'first name',
+                              'enter your first name',
+                              _firstNameController,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: SmallTextForm.customText(
-                            context,
-                            'Last Name',
-                            'enter your last name',
-                            _lastNameController,
+                          Expanded(
+                            child: SmallTextForm.customText(
+                              context,
+                              'Last Name',
+                              'enter your last name',
+                              _lastNameController,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    CustomTextForm.customText(
-                        context,
-                        'Password (not required)',
-                        'Enter your password',
-                        _passwordController,
-                        true,
-                        _passwordController,
-                        true),
-                    CustomTextForm.customText(
-                        context,
-                        'Confirm Password',
-                        'Enter your password',
-                        _confirmPasswordController,
-                        true,
-                        _passwordController,
-                        true),
-                    CustomButton(
-                      inputText: 'Save',
-                      onpressed: () {
-                        ApiService.editProfile(
-                          _firstNameController.text,
-                          _lastNameController.text,
-                          _passwordController.text,
-                          _passwordController.text,
-                          _image,
+                        ],
+                      ),
+                      CustomTextForm.customText(
                           context,
-                        );
-                      },
-                    ),
-                  ],
+                          'Previous password',
+                          'Enter your previous password',
+                          _previousPasswordController,
+                          false,
+                          _passwordController,
+                          true),
+                      CustomTextForm.customText(
+                          context,
+                          'Password',
+                          'Enter your password',
+                          _passwordController,
+                          true,
+                          _passwordController,
+                          true),
+                      CustomTextForm.customText(
+                          context,
+                          'Confirm Password',
+                          'Enter your password',
+                          _confirmPasswordController,
+                          true,
+                          _passwordController,
+                          true),
+                      CustomButton(
+                        inputText: 'Save',
+                        onpressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            var data = jsonEncode({
+                              "firstName": _firstNameController.text,
+                              "lastName": _lastNameController.text,
+                              "previousPass": _previousPasswordController.text,
+                              "password": _passwordController.text,
+                              "confirm_pass": _confirmPasswordController.text,
+                              "profilePicture": user['profilePicture'],
+                            });
+                            ApiService.editProfile(data, _image, context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }
