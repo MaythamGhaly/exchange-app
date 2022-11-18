@@ -24,7 +24,7 @@ class _UploadPostState extends State<UploadPost> {
   var items = [
     'food',
     'medicine',
-    'beauty',
+    'others',
     'donate',
   ];
   String? selectedValue;

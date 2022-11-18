@@ -131,8 +131,8 @@ class _HomeControllerState extends State<HomeController>
                   text: 'Medicine',
                 ),
                 Tab(
-                  icon: Icon(Icons.auto_fix_high),
-                  text: 'Beauty',
+                  icon: Icon(Icons.other_houses),
+                  text: 'Others',
                 ),
                 Tab(
                   icon: Icon(Icons.bloodtype),
