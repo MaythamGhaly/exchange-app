@@ -7,7 +7,7 @@ const productsSchema = new mongoose.Schema({
         required: 'product_name is required'
     },
     expiry_date: {
-        type: Date,
+        type: String,
         required: 'expiry_date is required'
     },
     productPicture: {
