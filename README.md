@@ -70,13 +70,13 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Uing the above mentioned tecch stacks and the wireframes build with figma from the user sotries we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Home (lightmode)    | Login(lightmode) | Chat(lightmode) |ProductPage(lightmode)| 
-| --------------------| --------------------| --------------------| --------------------|
+| Home (darkmode)    | Login(darkmode) | Chat(darkmode) |ProductPage(darkmode)| 
+| --------------------| -----------------|-----------------|----------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/main%20chat%20dark.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20dark.jpg) |
 
-<!-- | Home (darkmode)    | Login(darkmode) | Chat(darkmode) |ProductPage(darkmode)| 
+| Home (lightmode)    | Login(lightmode) | Chat(lightmode) |ProductPage(lightmode)| 
 | -------------------| ----------------|----------------|---------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) | -->
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/main%20chat%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20light.jpg) |
 
 
 <br><br>
@@ -91,7 +91,7 @@ To get a local copy up and running follow these simple example steps.
 This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
-  npm install npm@latest -g
+  npm i express
   ```
 
 ### Installation
@@ -101,15 +101,12 @@ _Below is an example of how you can instruct your audience on installing and set
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/MaythamGhaly/exchange-app.git
    ```
-3. Install NPM packages
+3. Flutter run
    ```sh
-   npm install
+   flutter run
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+
 
 
