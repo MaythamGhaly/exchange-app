@@ -160,6 +160,7 @@ class _EditProfileState extends State<EditProfile> {
                               "profilePicture": user['profilePicture'],
                             });
                             ApiService.editProfile(data, _image, context);
+                            Navigator.pop(context);
                           }
                         },
                       ),

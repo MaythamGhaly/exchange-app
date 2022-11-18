@@ -8,8 +8,9 @@ import '../services/rest_api.dart';
 
 class ChatingPage extends StatefulWidget {
   var userId;
+  var user_name;
 
-  ChatingPage({super.key, required this.userId});
+  ChatingPage({super.key, required this.userId, required this.user_name});
   // ignore: prefer_typing_uninitialized_variables
 
   @override
@@ -22,6 +23,7 @@ class _ChatingPageState extends State<ChatingPage> {
   List messages = [];
   late IO.Socket socket;
   var userId;
+  var user_name;
 
   Future<void> connect() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -86,6 +88,7 @@ class _ChatingPageState extends State<ChatingPage> {
   @override
   void initState() {
     connect();
+
     getMessages(widget.userId);
     super.initState();
   }
@@ -97,9 +100,9 @@ class _ChatingPageState extends State<ChatingPage> {
           centerTitle: true,
           shadowColor: const Color.fromARGB(255, 111, 8, 143),
           elevation: 10,
-          title: const Text(
-            'Maytham',
-            style: TextStyle(
+          title: Text(
+            widget.user_name,
+            style: const TextStyle(
               color: Color.fromARGB(200, 92, 225, 230),
               fontSize: 22,
               fontWeight: FontWeight.bold,

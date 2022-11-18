@@ -152,8 +152,9 @@ class _ProductPageState extends State<ProductPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ChatingPage(userId: product['user']['_id'])),
+                            builder: (context) => ChatingPage(
+                                userId: product['user']['_id'],
+                                user_name: product['user']['first_name'])),
                       );
                     },
                   ),

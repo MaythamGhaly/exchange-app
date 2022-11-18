@@ -56,8 +56,10 @@ class _CustomCardState extends State<CustomCard> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChatingPage(userId: info['_id'])),
+                                          builder: (context) => ChatingPage(
+                                                userId: info['_id'],
+                                                user_name: info['first_name'],
+                                              )),
                                     );
                                   },
                                   child: ListTile(

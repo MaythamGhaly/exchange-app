@@ -49,6 +49,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   ),
                   children: products
                       .map((product) => Card(
+                            margin: const EdgeInsets.only(bottom: 0),
                             elevation: 10,
                             shadowColor:
                                 const Color.fromARGB(255, 92, 225, 230),

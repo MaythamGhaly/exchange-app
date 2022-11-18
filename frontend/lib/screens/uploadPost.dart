@@ -187,6 +187,10 @@ class _UploadPostState extends State<UploadPost> {
                     "productPicture": '',
                   });
                   ApiService.uploadPost(data, _image, context);
+                  _descriptionController.clear();
+                  _productNameController.clear();
+                  _expiryDateController.clear();
+                  _image = null;
                 }
                 if (_image == null) {
                   ApiService.showSnackBar(context, "image is required");

@@ -149,7 +149,7 @@ class _HomeControllerState extends State<HomeController>
                 CategoryPage(category: 'all'),
                 CategoryPage(category: 'food'),
                 CategoryPage(category: 'medicine'),
-                CategoryPage(category: 'beauty'),
+                CategoryPage(category: 'others'),
                 CategoryPage(category: 'donate'),
               ],
             ),
