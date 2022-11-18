@@ -1,0 +1,34 @@
+
+Auth API :
+
+http://0.0.0.0:3000/auth/login
+http://0.0.0.0:3000/auth/Register
+
+User API :
+
+http://0.0.0.0:3000/add-Product
+http://0.0.0.0:3000/edit-Profile
+http://0.0.0.0:3000/get-products-by-category/:category
+http://0.0.0.0:3000/add-to-Favorite/:product_id
+http://0.0.0.0:3000/search/:product_name
+http://0.0.0.0:3000/get-favorites
+http://0.0.0.0:3000/delete-from-Favorite/:product_id
+http://0.0.0.0:3000/find-create-room
+http://0.0.0.0:3000/add-chat
+http://0.0.0.0:3000/get-chats/:id/:id
+http://0.0.0.0:3000/get-rooms
+http://0.0.0.0:3000/get-product-by-id/:id
+http://0.0.0.0:3000/deal-done/:id
+http://0.0.0.0:3000/get-user
+
+Admin API:
+
+http://0.0.0.0:3000/approved/:id
+http://0.0.0.0:3000/delete-post/:id
+http://0.0.0.0:3000/get-all-users
+http://0.0.0.0:3000/get-posts
+http://0.0.0.0:3000/get-banned-users
+http://0.0.0.0:3000/get-userban-user/:id
+http://0.0.0.0:3000/remove-ban/:id
+
+
