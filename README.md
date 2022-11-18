@@ -34,15 +34,22 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| wireframe |
-|---------------------------------------------------------------------------------|
+<h1 align="center">Wireframe</h1>
+
+| Home                | Login            | Product            |Profile           | 
+| --------------------| -----------------|-----------------|----------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page%20wireframe.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page%20wireframe.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page%20wireframe.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/profile%20page%20wireframe.svg) |
+
+<h1 align="center">Mockup</h1>
+
+
 | Home (lightmode)    | Login(lightmode) | Home(lightmode) |ProductPage(lightmode)| 
 | --------------------| -----------------|-----------------|----------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
 
 | Home (darkmode)    | Login(darkmode) | Home(darkmode) |ProductPage(darkmode)| 
 | -------------------| ----------------|----------------|---------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
 
 
 <br><br>
