@@ -80,10 +80,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                   ),
                   const PopupMenuItem<int>(
-                    value: 1,
-                    child: Text("Settings"),
-                  ),
-                  const PopupMenuItem<int>(
                     value: 2,
                     child: Text("Logout"),
                   ),
@@ -93,8 +89,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 if (value == 0) {
                   print("Switch theme is selected.");
                 } else if (value == 1) {
-                  print("Settings menu is selected.");
-                } else if (value == 2) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Login()),
@@ -102,6 +96,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 }
               }),
         ],
+        leading: Image.asset(
+          'assets/Exchange-logo.png',
+        ),
       ),
       body: SingleChildScrollView(
         child: screens.elementAt(_selectedIndex),

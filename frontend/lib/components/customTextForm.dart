@@ -32,11 +32,11 @@ class CustomTextForm {
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please enter some text';
+              return 'this field is required';
             }
             if (confirmPassword) {
               if (value != password.text) {
-                return 'Please enter same password';
+                return 'this field is required';
               }
             }
             return null;

@@ -55,6 +55,9 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
             fontWeight: FontWeight.bold,
           ),
         ),
+        leading: Image.asset(
+          'assets/Exchange-logo.png',
+        ),
         actions: [
           PopupMenuButton(
               // add icon, by default "3 dot" icon
@@ -88,10 +91,6 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
                     ),
                   ),
                   const PopupMenuItem<int>(
-                    value: 1,
-                    child: Text("Settings"),
-                  ),
-                  const PopupMenuItem<int>(
                     value: 2,
                     child: Text("Logout"),
                   ),
@@ -101,8 +100,6 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
                 if (value == 0) {
                   print("Switch theme is selected.");
                 } else if (value == 1) {
-                  print("Settings menu is selected.");
-                } else if (value == 2) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Login()),
