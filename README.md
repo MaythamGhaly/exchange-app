@@ -21,8 +21,7 @@
 - As a user, I want to upload posts, so that other users can see my product
 - As a user, I want to have a favorite list, so that I can find desired products quickly
 - As a user, I want to search products, so that I can find products by name or category
-- As a user, I want to chat with other users, so that I can make deals
-- As a user, I want to receive notifications, so that I can know when others text me
+- As a user, I want to chat with other users (real time chat), so that I can make deals
 - As a admin, I want to see and ban users with unallowed posts, so that the app would stay safe
 - As a admin, I want to approve posts before uploading, so that I can check if the post permissible
 
@@ -35,13 +34,14 @@
 > This design was planned before on paper, then moved to Figma app for the fine details.
 Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
-| Register(lightmode) | Login(lightmode) | Home(lightmode) | ProductPage(lightmode) | 
-| --------------------| -----------------|-----------------|------------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/product%20page-1.svg) |
+| wireframe |
+| Register(lightmode) | Login(lightmode) | Home(lightmode) |ProductPage(lightmode)| 
+| --------------------| -----------------|-----------------|----------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/Register%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
 
-| Register(darkmode) | Login(darkmode) | Home(darkmode) | ProductPage(darkmode) | 
-| --------------------| -----------------|-----------------|------------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/Register%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/mockup/product%20page.svg) |
+| Register(darkmode) | Login(darkmode) | Home(darkmode) |ProductPage(darkmode)| 
+| -------------------| ----------------|----------------|---------------------|
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/Register%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
 
 
 <br><br>
