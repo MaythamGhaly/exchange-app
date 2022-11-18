@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/rest_api.dart';
 import 'chatingPage.dart';
 import '../components/customButton.dart';
-import '../components/uploadPost.dart';
+import 'uploadPost.dart';
 import 'editProfile.dart';
 import 'home.dart';
 

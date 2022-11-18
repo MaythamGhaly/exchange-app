@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/favoritesSection.dart';
 import 'package:frontend/screens/login.dart';
 
 import '../services/rest_api.dart';
 import 'chatingPage.dart';
 import '../components/customButton.dart';
-import '../components/uploadPost.dart';
+import 'uploadPost.dart';
 import 'editProfile.dart';
 
 class Profile extends StatefulWidget {
@@ -125,45 +126,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     controller: _controller,
                     children: <Widget>[
                       UploadPost(),
-                      SizedBox(
-                        height: 500,
-                        child: GridView(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            // number of items per row
-                            crossAxisCount: 2,
-                            // vertical spacing between the items
-                            mainAxisSpacing: 10,
-                            // horizontal spacing between the items
-                            crossAxisSpacing: 10,
-                          ),
-                          children: test
-                              .map((item) => Card(
-                                    elevation: 10,
-                                    shadowColor:
-                                        const Color.fromARGB(255, 92, 225, 230),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: InkWell(
-                                        onTap: () {
-                                          print("hi");
-                                        },
-                                        child: Column(
-                                          children: [
-                                            Image.asset(
-                                              'assets/Exchange-logo.png',
-                                              width: 120,
-                                              height: 120,
-                                            ),
-                                            const Text('Category - Name'),
-                                            const Text('EXP: 2022-12-31'),
-                                          ],
-                                        )),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
+                      Favorites(),
                     ],
                   ),
                 ),
