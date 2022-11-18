@@ -44,8 +44,11 @@ class _postsSectionsState extends State<postsSections> {
                   ),
                   children: products
                       .map((product) => Container(
+                            height: 500,
                             padding: const EdgeInsets.only(right: 15, left: 15),
                             child: Card(
+                              margin: const EdgeInsets.only(bottom: 0),
+                              semanticContainer: true,
                               elevation: 10,
                               shadowColor:
                                   const Color.fromARGB(255, 92, 225, 230),
