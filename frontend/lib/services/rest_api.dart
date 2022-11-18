@@ -1,15 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/adminScreen/adminPage.dart';
-import 'package:frontend/screens/adminScreen/usersSection.dart';
 import 'package:frontend/screens/login.dart';
+import 'package:frontend/screens/profile.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../screens/basePage.dart';
-import '../screens/home.dart';
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';
 
 class ApiService {
   // static Future<String> getStringValuesSF() async {
@@ -26,7 +28,7 @@ class ApiService {
     scaffold.showSnackBar(
       SnackBar(
           content: Text(message),
-          duration: const Duration(seconds: 3),
+          duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -144,37 +146,31 @@ class ApiService {
     return data;
   }
 
-  static Future editProfile(first_name, last_name, password, confirm_password,
-      image, BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    final msg = jsonEncode({
-      "first_name": first_name,
-      "last_name": last_name,
-      "password": password,
-      "confirm_password": confirm_password,
-      "profilePicture": image
-    });
-    try {
-      var response =
-          await http.post(Uri.parse('http://192.168.137.1:3000/edit-Profile'),
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $token',
-              },
-              body: msg);
-      var jsonData = json.decode(response.body);
-      if (response.statusCode == 200) {
-        showSnackBar(context, "Edit Success");
-      } else {
-        showSnackBar(context, "Edit Failed");
-      }
-    } catch (e) {
-      print(e);
-      showSnackBar(context, "Edit Failed");
-    }
-  }
+  // static Future editProfile(first_name, last_name, password, confirm_password,
+  //     pickedFile, BuildContext context) async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   var token = sharedPreferences.getString("token");
+
+  //   try {
+  //     var response =
+  //         await http.post(Uri.parse('http://192.168.137.1:3000/edit-Profile'),
+  //             headers: {
+  //               'Content-Type': 'application/json',
+  //               'Accept': 'application/json',
+  //               'Authorization': 'Bearer $token',
+  //             },
+  //             body: msg);
+  //     var jsonData = json.decode(response.body);
+  //     if (response.statusCode == 200) {
+  //       showSnackBar(context, "Edit Success");
+  //     } else {
+  //       showSnackBar(context, "Edit Failed");
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     showSnackBar(context, "Edit Failed");
+  //   }
+  // }
 
   static findOrAddRoom(receiver) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -226,6 +222,72 @@ class ApiService {
     });
     var data = json.decode(response.body);
     return data;
+  }
+
+  static search(product_name) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/search/${product_name}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    var data = json.decode(response.body);
+    return data;
+  }
+
+  static addFavorites(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/add-to-Favorite/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    var data = json.decode(response.body);
+    if (data['message'] == "already exist") {
+      showSnackBar(context, "Already exist in your favorites");
+    }
+    if (data['message'] == "success") {
+      showSnackBar(context, "Added to your favorites");
+    }
+  }
+
+  static getFavorites() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-favorites'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
+
+  static deleteFavorite(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse(
+            'http://192.168.137.1:3000/delete-from-Favorite/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+
+    var data = json.decode(response.body);
+    if (data['status'] == "success") {
+      showSnackBar(context, "product deleted from your favorites");
+    } else {
+      showSnackBar(context, "something went wrong");
+    }
   }
 
   static getusers() async {
@@ -334,6 +396,113 @@ class ApiService {
     }
     showSnackBar(context, "post deleted failed");
     return false;
+  }
+
+  static Future editProfile(em, File? imageFile, BuildContext context) async {
+    // String? finalUrl;
+    // await getStringValuesSF().then((value) {
+    //   finalUrl = value!;
+    // });
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.137.1:3000/edit-Profile'));
+    var employee = jsonDecode(em);
+    var mimeType = lookupMimeType(imageFile!.path);
+    mimeType ??= 'text/plain; charset=UTF-8';
+
+    var ImageList;
+    await imageFile.readAsBytes().then((value) => {
+          ImageList = value,
+        });
+
+    request.headers['Content-Type'] = 'multipart/form-data';
+    request.headers['Accept'] = 'application/json';
+    request.headers['Authorization'] = 'Bearer $token';
+    request.fields.addAll({
+      'firstName': employee['firstName'],
+      'lastName': employee['lastName'],
+      'previousPass': employee['previousPass'],
+      'password': employee['password'],
+      'confirm_pass': employee['confirm_pass'],
+      'imageName': imageFile.path.split('/').last,
+    });
+    request.files.add(http.MultipartFile.fromBytes('imageFile', ImageList,
+        filename: imageFile.path.split('/').last,
+        contentType: MediaType.parse(mimeType)));
+
+    var response;
+    try {
+      response = await request.send();
+    } on Exception catch (exception) {
+      print('exception1');
+      showSnackBar(context, exception.toString());
+    } catch (error) {
+      showSnackBar(context, error.toString());
+    }
+    if (response.statusCode == 200) {
+      showSnackBar(context, "Profile updated");
+      // ignore: use_build_context_synchronously
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => Profile()),
+      // );
+    } else {
+      showSnackBar(context, "Update failed");
+    }
+  }
+
+  static Future uploadPost(em, File? imageFile, BuildContext context) async {
+    // String? finalUrl;
+    // await getStringValuesSF().then((value) {
+    //   finalUrl = value!;
+    // });
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://192.168.137.1:3000/add-Product'));
+    var employee = jsonDecode(em);
+    var mimeType = lookupMimeType(imageFile!.path);
+    mimeType ??= 'text/plain; charset=UTF-8';
+
+    var ImageList;
+    await imageFile.readAsBytes().then((value) => {
+          ImageList = value,
+        });
+
+    request.headers['Content-Type'] = 'multipart/form-data';
+    request.headers['Accept'] = 'application/json';
+    request.headers['Authorization'] = 'Bearer $token';
+    request.fields.addAll({
+      'product_name': employee['product_name'],
+      'expiry_date': employee['expiry_date'],
+      'category': employee['category'],
+      'description': employee['description'],
+      'productPicture': imageFile.path.split('/').last,
+    });
+    request.files.add(http.MultipartFile.fromBytes('imageFile', ImageList,
+        filename: imageFile.path.split('/').last,
+        contentType: MediaType.parse(mimeType)));
+
+    var response;
+    try {
+      response = await request.send();
+    } on Exception catch (exception) {
+      print('exception1');
+      showSnackBar(context, exception.toString());
+    } catch (error) {
+      showSnackBar(context, error.toString());
+    }
+    if (response.statusCode == 200) {
+      showSnackBar(context, "post uploaded");
+      // ignore: use_build_context_synchronously
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => Profile()),
+      // );
+    } else {
+      showSnackBar(context, "upload failed");
+    }
   }
   // static Future<List<NotAvailableDate>> GetException() async {
   //   String finalUrl;
