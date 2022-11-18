@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/components/customButton.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,9 +13,9 @@ class UploadPost extends StatefulWidget {
 }
 
 class _UploadPostState extends State<UploadPost> {
-  TextEditingController _productNameController = TextEditingController();
-  TextEditingController _expiryDateController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _productNameController = TextEditingController();
+  final TextEditingController _expiryDateController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   File? _image;
   String dropdownvalue = 'Item 1';

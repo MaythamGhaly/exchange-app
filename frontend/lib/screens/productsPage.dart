@@ -1,17 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/categoryPage.dart';
-import 'package:frontend/screens/login.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../services/rest_api.dart';
 import 'chatingPage.dart';
 import '../components/customButton.dart';
-import 'uploadPost.dart';
-import 'editProfile.dart';
-import 'home.dart';
 
 class ProductPage extends StatefulWidget {
   var product;
@@ -31,17 +22,8 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
-  // Future getUserId() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   var userId = sharedPreferences.getString("user_id");
-  //   setState(() {
-  //     userId = userId;
-  //   });
-  // }
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     product = widget.product;
     getProductByCategory();

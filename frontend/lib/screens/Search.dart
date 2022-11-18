@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:frontend/screens/adminScreen/bannedSection.dart';
-import 'package:frontend/screens/adminScreen/postsSection.dart';
-import 'package:frontend/screens/adminScreen/usersSection.dart';
-import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/productsPage.dart';
-import 'package:frontend/screens/profile.dart';
 import 'package:frontend/services/rest_api.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/dark_theme_provider.dart';
-import '../../components/customButton.dart';
-import './login.dart';
-import './mainChatsPage.dart';
-import 'login.dart';
 
 class search extends StatefulWidget {
   String product_name;

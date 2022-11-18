@@ -1,13 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/adminScreen/adminPage.dart';
-import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/login.dart';
-import 'package:frontend/screens/profile.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../screens/basePage.dart';
@@ -15,14 +12,7 @@ import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ApiService {
-  // static Future<String> getStringValuesSF() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   //Return String
-  //   var stringValue = prefs.getString('ReservationApi');
-
-  //   return stringValue;
-  // }
-
+  // SnackBar to use it in the fetching functions
   static showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     final scaffold = ScaffoldMessenger.of(context);
@@ -37,6 +27,8 @@ class ApiService {
     );
   }
 
+  // Auth functions
+  // Signin function
   static Future signin(email, password, BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var jsonData;
@@ -85,6 +77,7 @@ class ApiService {
     }
   }
 
+  // Signup function
   static Future signUp(first_name, last_name, email, password, confirm_pass,
       BuildContext context) async {
     var headers = {
@@ -120,6 +113,8 @@ class ApiService {
     }
   }
 
+// User functions
+// Get user info
   static getUserr() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -133,6 +128,7 @@ class ApiService {
     return data;
   }
 
+// fetch api to get product by category name
   static getProductByCategory(category) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -148,32 +144,7 @@ class ApiService {
     return data;
   }
 
-  // static Future editProfile(first_name, last_name, password, confirm_password,
-  //     pickedFile, BuildContext context) async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   var token = sharedPreferences.getString("token");
-
-  //   try {
-  //     var response =
-  //         await http.post(Uri.parse('http://192.168.137.1:3000/edit-Profile'),
-  //             headers: {
-  //               'Content-Type': 'application/json',
-  //               'Accept': 'application/json',
-  //               'Authorization': 'Bearer $token',
-  //             },
-  //             body: msg);
-  //     var jsonData = json.decode(response.body);
-  //     if (response.statusCode == 200) {
-  //       showSnackBar(context, "Edit Success");
-  //     } else {
-  //       showSnackBar(context, "Edit Failed");
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     showSnackBar(context, "Edit Failed");
-  //   }
-  // }
-
+// fetch api to get the chats rooms
   static findOrAddRoom(receiver) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -193,6 +164,7 @@ class ApiService {
     return res;
   }
 
+// api to save the message to db
   static sendMessage(receiver, message) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -226,6 +198,7 @@ class ApiService {
     return data;
   }
 
+//  api to search by product name
   static search(product_name) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -240,6 +213,7 @@ class ApiService {
     return data;
   }
 
+//  api to add product to favorite
   static addFavorites(context, productId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -259,6 +233,7 @@ class ApiService {
     }
   }
 
+// api to get the favorite products
   static getFavorites() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -272,6 +247,7 @@ class ApiService {
     return data;
   }
 
+// api to remove product from favorite
   static deleteFavorite(context, productId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -292,119 +268,8 @@ class ApiService {
     }
   }
 
-  static getusers() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http
-        .get(Uri.parse('http://192.168.137.1:3000/get-all-users'), headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    var data = json.decode(response.body);
-    return data;
-  }
-
-  static getUsersBanned() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http
-        .get(Uri.parse('http://192.168.137.1:3000/get-banned-users'), headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    var data = json.decode(response.body);
-    return data;
-  }
-
-  static banUser(context, userId) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http.get(
-        Uri.parse('http://192.168.137.1:3000/ban-user/${userId}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-    showSnackBar(context, "User are banned");
-    return false;
-  }
-
-  static removeBan(context, userId) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http.get(
-        Uri.parse('http://192.168.137.1:3000/remove-ban/${userId}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-    if (response.statusCode == 200) {
-      showSnackBar(context, "ban are removed");
-      return true;
-    }
-    showSnackBar(context, "Remove ban failed");
-    return false;
-  }
-
-  static getPosts() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http
-        .get(Uri.parse('http://192.168.137.1:3000/get-posts'), headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    var data = json.decode(response.body);
-    print(data);
-    return data;
-  }
-
-  static approvePost(context, productId) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http.get(
-        Uri.parse('http://192.168.137.1:3000/approved/${productId}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-    if (response.statusCode == 200) {
-      showSnackBar(context, "post are approved");
-      return true;
-    }
-    showSnackBar(context, "post approved failed");
-    return false;
-  }
-
-  static deletePost(context, productId) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await http.get(
-        Uri.parse('http://192.168.137.1:3000/delete-post/${productId}'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-    if (response.statusCode == 200) {
-      showSnackBar(context, "post are deleted");
-      return true;
-    }
-    showSnackBar(context, "post deleted failed");
-    return false;
-  }
-
+  // api to edit profile
   static Future editProfile(em, File? imageFile, BuildContext context) async {
-    // String? finalUrl;
-    // await getStringValuesSF().then((value) {
-    //   finalUrl = value!;
-    // });
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var request = http.MultipartRequest(
@@ -412,8 +277,8 @@ class ApiService {
     var employee = jsonDecode(em);
     var mimeType = lookupMimeType(imageFile!.path);
     mimeType ??= 'text/plain; charset=UTF-8';
-
     var ImageList;
+
     await imageFile.readAsBytes().then((value) => {
           ImageList = value,
         });
@@ -454,11 +319,8 @@ class ApiService {
     }
   }
 
+//  api to add post
   static Future uploadPost(em, File? imageFile, BuildContext context) async {
-    // String? finalUrl;
-    // await getStringValuesSF().then((value) {
-    //   finalUrl = value!;
-    // });
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var request = http.MultipartRequest(
@@ -506,121 +368,120 @@ class ApiService {
       showSnackBar(context, "upload failed");
     }
   }
-  // static Future<List<NotAvailableDate>> GetException() async {
-  //   String finalUrl;
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
 
-  //   final response = await http.get('$finalUrl/reservations/GetExceptionDate');
+//  Admin apis
+//  api to get users
+  static getusers() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-all-users'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
 
-  //   var responseData = jsonDecode(response.body);
+//  api to get users banned
+  static getUsersBanned() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-banned-users'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    return data;
+  }
 
-  //   List<NotAvailableDate> dates = [];
-  //   for (var notavailble in responseData) {
-  //     DateTime date = DateTime.parse(notavailble);
+//  api to ban user
+  static banUser(context, userId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/ban-user/${userId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    showSnackBar(context, "User are banned");
+    return false;
+  }
 
-  //     dates.add(NotAvailableDate(DateTime(date.year, date.month, date.day)));
-  //   }
-  //   return dates;
-  // }
+// api to unban user
+  static removeBan(context, userId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/remove-ban/${userId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "ban are removed");
+      return true;
+    }
+    showSnackBar(context, "Remove ban failed");
+    return false;
+  }
 
-  // static Future<List<DateTime>> notAvailableDay() async {
-  //   String finalUrl;
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
+//  api to get all posts
+  static getPosts() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http
+        .get(Uri.parse('http://192.168.137.1:3000/get-posts'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    var data = json.decode(response.body);
+    print(data);
+    return data;
+  }
 
-  //   final response = await http.get('$finalUrl/reservations/GetDatesCount');
+//  api to approve post
+  static approvePost(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/approved/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "post are approved");
+      return true;
+    }
+    showSnackBar(context, "post approved failed");
+    return false;
+  }
 
-  //   var responseData = jsonDecode(response.body);
-
-  //   List<DateTime> dates = [];
-  //   for (var notavailble in responseData) {
-  //     dates.add(DateTime.parse(notavailble));
-  //   }
-  //   return dates;
-  // }
-
-  // static Future<int> DeleteExceptionDate(DateTime date) async {
-  //   String finalUrl;
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
-  //   int result;
-  //   final response =
-  //       await http.delete('$finalUrl/reservations/DeleteExceptionDate/$date');
-
-  //   var responseData = jsonDecode(response.body);
-
-  //   result = responseData;
-
-  //   return result;
-  // }
-
-  // static Future<List<AllInput>> SearchByDate(
-  //     DateTime date, BuildContext context) async {
-  //   String finalUrl;
-  //   List<AllInput> reservationsList = [];
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
-
-  //   final response =
-  //       await http.get('$finalUrl/reservations/SearchByDate/$date');
-
-  //   if (response.statusCode == 200) {
-  //     var responseData = jsonDecode(response.body);
-
-  //     for (var r in responseData) {
-  //       reservationsList.add(AllInput.fromJson(r));
-  //     }
-
-  //     return reservationsList;
-  //   } else {
-  //     showSnackBar(context, "Reservation Not found");
-  //     throw Exception("Reservation Not found");
-  //   }
-  // }
-
-  // static Future<List<AllInput>> SearchByPhoneNumber(
-  //     int phone, BuildContext context) async {
-  //   String finalUrl;
-  //   List<AllInput> reservationsList = [];
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
-
-  //   final response =
-  //       await http.get('$finalUrl/reservations/SearchByPhoneNumber/$phone');
-
-  //   if (response.statusCode == 200) {
-  //     var responseData = jsonDecode(response.body);
-
-  //     for (var r in responseData) {
-  //       reservationsList.add(AllInput.fromJson(r));
-  //     }
-
-  //     return reservationsList;
-  //   } else {
-  //     showSnackBar(context, "Reservation Not found");
-  //     throw Exception("Reservation Not found");
-  //   }
-  // }
-
-  // static Future<bool> AddDate(String notAvailableDate) async {
-  //   String finalUrl;
-  //   await getStringValuesSF().then((value) {
-  //     finalUrl = value;
-  //   });
-  //   String encoded = jsonEncode(notAvailableDate);
-
-  //   final response = await http.post('$finalUrl/Reservations/PostDate',
-  //       body: encoded, headers: {"Content-Type": "application/json"});
-
-  //   if (response.statusCode == 200) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+//  api to delete post
+  static deletePost(context, productId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var response = await http.get(
+        Uri.parse('http://192.168.137.1:3000/delete-post/${productId}'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      showSnackBar(context, "post are deleted");
+      return true;
+    }
+    showSnackBar(context, "post deleted failed");
+    return false;
+  }
 }

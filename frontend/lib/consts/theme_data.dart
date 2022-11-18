@@ -19,7 +19,6 @@ class Styles {
                 ? const Color.fromARGB(255, 104, 104, 104)
                 : const Color.fromARGB(255, 224, 224, 224)),
       ),
-
       listTileTheme: ListTileThemeData(
         textColor: isDarkTheme ? Colors.white : Colors.black,
         iconColor: isDarkTheme ? Colors.white : Colors.black,
@@ -73,36 +72,6 @@ class Styles {
       cardColor: isDarkTheme
           ? const Color.fromARGB(255, 90, 90, 90)
           : const Color.fromARGB(255, 226, 226, 226),
-
-      // appBarTheme: AppBarTheme(
-      //   backgroundColor:
-      //       isDarkTheme ? Color.fromARGB(255, 53, 53, 53) : Colors.white,
-      //   elevation: 20,
-      //   shadowColor: const Color.fromARGB(255, 111, 8, 143),
-      //   iconTheme: isDarkTheme
-      //       ? const IconThemeData(color: Colors.white)
-      //       : const IconThemeData(color: Colors.black),
-      //   titleTextStyle: const TextStyle(
-      //     color: Color.fromARGB(200, 92, 225, 230),
-      //     fontSize: 22,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
-
-      // primaryColor: isDarkTheme ? Colors.black : Colors.grey.shade300,
-      // backgroundColor: isDarkTheme ? Colors.grey.shade700 : Colors.white,
-      // indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
-      // buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
-      // hintColor: isDarkTheme ? Colors.grey.shade300 : Colors.grey.shade800,
-      // highlightColor: isDarkTheme ? Color(0xff372901) : Color(0xffFCE192),
-      // hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
-      // focusColor: isDarkTheme ? Color(0xff0B2512) : Color(0xffA8DAB5),
-      // disabledColor: Colors.grey,
-      // cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
-      // canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
-      // brightness: isDarkTheme ? Brightness.dark : Brightness.light,
-      // buttonTheme: Theme.of(context).buttonTheme.copyWith(
-      //     colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       iconTheme: IconThemeData(
         color: isDarkTheme ? Colors.white : Colors.black,
       ),
@@ -111,8 +80,6 @@ class Styles {
             ? const Color.fromARGB(255, 26, 26, 26)
             : const Color.fromARGB(255, 255, 255, 255),
       ),
-      // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-      //     .copyWith(secondary: Colors.deepPurple),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: isDarkTheme
@@ -120,7 +87,6 @@ class Styles {
               : const Color.fromARGB(193, 51, 51, 51),
         ),
       ),
-
       textTheme: TextTheme(
         headline1: TextStyle(
           color: isDarkTheme ? Colors.white : Colors.black,
@@ -137,8 +103,6 @@ class Styles {
           color: isDarkTheme ? Colors.white : Colors.black,
         ),
       ),
-      // textSelectionTheme: TextSelectionThemeData(
-      //     selectionColor: isDarkTheme ? Colors.white : Colors.black),
     );
   }
 }

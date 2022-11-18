@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/productsPage.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 import '../../services/rest_api.dart';
 
@@ -75,8 +73,8 @@ class _userSectionState extends State<userSection> {
                         )
                         .toList(),
                   )
-                : Center(
-                    child: const Text('No users found'),
+                : const Center(
+                    child: Text('No users found'),
                   ))
       ],
     );

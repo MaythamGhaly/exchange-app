@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:drop_shadow_image/drop_shadow_image.dart';
-import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:frontend/components/customMessageCard.dart';
-import 'package:frontend/components/customTextForm.dart';
-import 'package:frontend/screens/basePage.dart';
-import 'package:frontend/screens/register.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/customButton.dart';
 import '../components/customMessageReplyCard.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -53,6 +46,7 @@ class _ChatingPageState extends State<ChatingPage> {
       "receiver": receiverId,
       "message": message
     };
+    // send massege to server
     socket.emit("message", dataJson);
     if (dataJson != null) {
       setMessage(dataJson);
@@ -61,6 +55,7 @@ class _ChatingPageState extends State<ChatingPage> {
   }
 
   void setUpSocketListener() {
+    // recive message from server
     socket.on("message-receive", (data) {
       if (data['message'] == null) {
         return;
@@ -70,13 +65,14 @@ class _ChatingPageState extends State<ChatingPage> {
   }
 
   void setMessage(var message) {
+    // set message to list
     setState(() {
       messages.add(message);
     });
   }
 
   void getMessages(userId) async {
-    print(userId);
+    // fetch messages from db
     var chats = await ApiService.findOrAddRoom(userId);
     if (chats['messages'] != null) {
       chats['messages'].map((chat) {

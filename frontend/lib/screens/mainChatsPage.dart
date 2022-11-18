@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/login.dart';
 import 'package:frontend/services/rest_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

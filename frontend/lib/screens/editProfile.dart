@@ -8,7 +8,6 @@ import 'dart:io';
 import '../components/customButton.dart';
 import '../components/smallTextField.dart';
 import '../services/rest_api.dart';
-import 'package:http/http.dart' as http;
 
 class EditProfile extends StatefulWidget {
   var user;
@@ -20,12 +19,13 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _previousPasswordController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _previousPasswordController =
+      TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   var user;
   final _formKey = GlobalKey<FormState>();

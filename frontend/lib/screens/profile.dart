@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/favoritesSection.dart';
-import 'package:frontend/screens/login.dart';
-
 import '../services/rest_api.dart';
-import 'chatingPage.dart';
 import '../components/customButton.dart';
 import 'uploadPost.dart';
 import 'editProfile.dart';
@@ -18,20 +15,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> with TickerProviderStateMixin {
   late TabController _controller;
-  List test = [
-    "test",
-    "test2",
-    "Stest3",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4",
-    "test4"
-  ];
-
   var user;
 
   getUser() async {

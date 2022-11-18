@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/productsPage.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 import '../../services/rest_api.dart';
 

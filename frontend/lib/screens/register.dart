@@ -3,7 +3,6 @@ import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/components/customTextForm.dart';
 import 'package:frontend/screens/login.dart';
 import 'package:frontend/services/rest_api.dart';
-
 import '../components/customButton.dart';
 import '../components/smallTextField.dart';
 
@@ -15,11 +14,12 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   hello() {

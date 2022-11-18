@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/productsPage.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 import '../services/rest_api.dart';
 
@@ -83,7 +82,8 @@ class _FavoritesState extends State<Favorites> {
                                       child: IconButton(
                                         iconSize: 25,
                                         icon: const Icon(Icons.favorite),
-                                        color: Color.fromARGB(255, 85, 20, 170),
+                                        color: const Color.fromARGB(
+                                            255, 85, 20, 170),
                                         onPressed: () async {
                                           await ApiService.deleteFavorite(
                                               context,
@@ -96,7 +96,7 @@ class _FavoritesState extends State<Favorites> {
                             ))
                         .toList(),
                   )
-                : Center(
+                : const Center(
                     child: Text("No Favorites"),
                   ))
       ],

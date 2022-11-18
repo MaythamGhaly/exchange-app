@@ -1,13 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:frontend/screens/Search.dart';
-import 'package:frontend/screens/productsPage.dart';
-import 'package:http/http.dart' as http;
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
-
-import '../services/rest_api.dart';
 import 'categoryPage.dart';
 
 class HomeController extends StatefulWidget {
@@ -97,7 +90,7 @@ class _HomeControllerState extends State<HomeController>
                         Icons.search,
                         size: 30,
                       ),
-                      color: Color.fromARGB(255, 111, 8, 143),
+                      color: const Color.fromARGB(255, 111, 8, 143),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           Navigator.push(

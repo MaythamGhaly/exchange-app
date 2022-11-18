@@ -1,19 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:frontend/components/customTextForm.dart';
-import 'package:frontend/screens/basePage.dart';
-import 'package:frontend/screens/editProfile.dart';
 import 'package:frontend/screens/register.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../services/rest_api.dart';
 import '../components/customButton.dart';
-import 'package:http/http.dart' as http;
-
-import 'home.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -23,8 +15,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +37,7 @@ class _LoginState extends State<Login> {
         ),
         actions: [
           Switch(
-            activeColor: Color.fromARGB(199, 1, 5, 5),
+            activeColor: const Color.fromARGB(199, 1, 5, 5),
             activeTrackColor: const Color.fromARGB(255, 111, 8, 143),
             inactiveThumbColor: const Color.fromARGB(131, 65, 64, 64),
             inactiveTrackColor: const Color.fromARGB(255, 224, 224, 224),
