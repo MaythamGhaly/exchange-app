@@ -93,7 +93,7 @@ class _UploadPostState extends State<UploadPost> {
                 child: SizedBox(
               width: 80,
               child: DropdownButton2(
-                hint: const Text('Select Item',
+                hint: const Text('Select Category',
                     style: TextStyle(
                       color: Color.fromARGB(255, 92, 225, 230),
                     )),

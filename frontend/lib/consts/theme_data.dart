@@ -57,11 +57,11 @@ class Styles {
             : const Color.fromARGB(255, 226, 226, 226),
       ),
       scaffoldBackgroundColor: isDarkTheme
-          ? const Color.fromARGB(255, 53, 53, 53)
+          ? Color.fromARGB(255, 31, 31, 31)
           : const Color.fromARGB(255, 255, 255, 255),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor:
-            isDarkTheme ? const Color.fromARGB(255, 53, 53, 53) : Colors.white,
+            isDarkTheme ? Color.fromARGB(255, 37, 37, 37) : Colors.white,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

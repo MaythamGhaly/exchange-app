@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/adminScreen/adminPage.dart';
+import 'package:frontend/screens/home.dart';
 import 'package:frontend/screens/login.dart';
 import 'package:frontend/screens/profile.dart';
 import 'package:image_picker/image_picker.dart';
@@ -61,9 +62,10 @@ class ApiService {
         sharedPreferences.setString("user_id", jsonData['user']['_id']);
         if (jsonData['user']['type'] == 'User') {
           // ignore: use_build_context_synchronously
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const MyStatefulWidget()),
+            (Route<dynamic> route) => false,
           );
         }
         if (jsonData['user']['type'] == 'Admin') {
