@@ -2,8 +2,11 @@ const User = require('../models/users.model');
 const Product = require('../models/products.model');
 const Favorite = require('../models/favorites.model');
 const Chat = require('../models/chats.model');
+const bcrypt = require('bcrypt');
+
 
 const multer = require('multer');
+const { response } = require('express');
 
 // function to upload image in the public folder
 const storage = multer.diskStorage({
@@ -18,24 +21,26 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         cb(null, true);
     } else {
-        cb(Error('upload jpg or png onlyge') , false);
+        cb(Error('upload jpg or png onlyge'), false);
     }
 }
-const upload = multer({storage: storage , limits: {
-    fileSize: 1024 * 1024 * 5 // we are allowing only 5 MB files
-},
-fileFilter: fileFilter
+const upload = multer({
+    storage: storage, limits: {
+        fileSize: 1024 * 1024 * 5 // we are allowing only 5 MB files
+    },
+    fileFilter: fileFilter
 });
 // api to add product
 const addProduct = async (req, res) => {
+    console.log(req.file)
     id = req.user._id;
     const { product_name, expiry_date, description, category } = req.body;
     const product = await Product.create({
         product_name,
         expiry_date,
-        productPicture: req.file.filename,
-        description,
         category,
+        description,
+        productPicture: req.file.filename,
         user: id
     });
     await product.save();
@@ -52,7 +57,7 @@ const getProductByCategory = async (req, res) => {
     const { category } = req.params;
     if (category === 'all') {
         const product = await Product.find({ approved: true, deal_done: false }).populate('user');
-        return res.send( product )
+        return res.send(product)
     }
     const product = await Product.find({ 'category': category, approved: true, deal_done: false }).populate('user');
     return res.send(product)
@@ -66,43 +71,60 @@ const getProductById = async (req, res) => {
 // api to get products by id
 const getUser = async (req, res) => {
     id = req.user._id;
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("+password");
     return res.send(user)
 }
 //  api to add to favorites
 const addFavorite = async (req, res) => {
+    const { product_id } = req.params;
     id = req.user._id;
-    const { product_id } = req.body;
-    const favorite = await Favorite.create({
-        product_id: product_id,
-        user: id,
+    const exist = await Favorite.find({ $and: [{ product: product_id }, { user: id }] });
+    if (exist.length == 0) {
+        const favorite = await Favorite.create({
+            product: product_id,
+            user: id,
 
-    });
-    await favorite.save();
+        });
+        await favorite.save();
 
-    return res.send({ message: "success" });
-}
-// api to edit profile
-const editProfile = async (req, res) => {
-    id = req.user._id;
-    const { first_name, last_name, password, confirm_pass } = req.body;
-    if (password !== confirm_pass) return res.status(400).json({ message: "Passwords do not match" });
-    await User.findOneAndUpdate(id, {
-        first_name,
-        last_name,
-        password,
-        confirm_pass,
-        profilePicture: req.file.filename
-    })
-
-    return res.send({ 'status': "success" })
+        return res.send({ message: "success" });
+    }
+    return res.send({ message: "already exist" });
 }
 //  api to get favorites
 const getFavorites = async (req, res) => {
     id = req.user._id;
-    const user = await Favorite.find({ id }).populate('product_id');
-    return res.send(user)
+    const favorites = await Favorite.find({ id }).populate({ path: 'product', populate: { path: 'user' } });
+    return res.send(favorites)
 }
+//  api to delete favorites
+const deleteFavorites = async (req, res) => {
+    const { product_id } = req.params;
+    id = req.user._id;
+    const reomve = await Favorite.findOneAndRemove({ id, product_id });
+    return res.send({ 'status': "success" })
+}
+// api to edit profile
+const editProfile = async (req, res) => {
+    id = req.user._id;
+    const { firstName, lastName, password, confirm_pass , previousPass} = req.body;
+    if (password !== confirm_pass) return res.status(400).json({ message: "Passwords do not match" });
+    const user = await User.findById(id).select("+password");
+    if (await bcrypt.compare(previousPass, user.password)) {
+        console.log(previousPass)
+        await User.findOneAndUpdate(id, {
+            "first_name": firstName,
+            'last_name': lastName,
+            "password": await bcrypt.hash(password, 10),
+            "confirm_pass": await bcrypt.hash(confirm_pass, 10),
+            profilePicture: req.file.filename
+        })
+        return res.status(200).json({ message: "success" });
+    }
+    return res.status(403).json({ message: "success" });
+
+}
+
 // api to get the deals done
 const dealDone = async (req, res) => {
     const { id } = req.params;
@@ -113,48 +135,54 @@ const dealDone = async (req, res) => {
 }
 
 const findOneOrCreat = async (req, res) => {
-    
-    const { receiver , sender } = req.body;
-    const room = await Chat.findOne({ $or : [{ user1 : receiver , user2 : sender } , { user1 : sender , user2 : receiver }]});
-    if(!room){
+
+    const { receiver, sender } = req.body;
+    const room = await Chat.findOne({ $or: [{ user1: receiver, user2: sender }, { user1: sender, user2: receiver }] });
+    if (!room) {
         const addRoom = await Chat.create({
             user1: receiver,
             user2: sender,
         });
-        
+
         await addRoom.save();
         return res.send({ message: "room added" });
     }
     return res.json(room);
-    
+
 }
 
 const getRooms = async (req, res) => {
-    
+
     id = req.user._id;
-    const room = await Chat.find({ $or : [{ user1 : id } , { user2 : id }]}).populate('user1').populate('user2');
-    
+    const room = await Chat.find({ $or: [{ user1: id }, { user2: id }] }).populate('user1').populate('user2');
+
     return res.send(room);
 }
 
 const addChat = async (req, res) => {
-    
-    const { receiver , sender , message } = req.body;
+
+    const { receiver, sender, message } = req.body;
     console.log(req.body);
-    const chat = await Chat.findOne({ $or : [{ user1 : receiver , user2 : sender } , { user1 : sender , user2 : receiver }]});
+    const chat = await Chat.findOne({ $or: [{ user1: receiver, user2: sender }, { user1: sender, user2: receiver }] });
     chat.messages.push({
         sender: sender,
         receiver: receiver,
         message: message
     })
-        await chat.save();
-        return res.send({ message: "success" });
+    await chat.save();
+    return res.send({ message: "success" });
 }
 
 const getChat = async (req, res) => {
-    const { receiver , sender } = req.params;
-    const chat = await Chat.findOne({ sender,receiver });
+    const { receiver, sender } = req.params;
+    const chat = await Chat.findOne({ sender, receiver });
     return res.send(chat.messages);
+}
+
+const search = async (req, res) => {
+    const { product_name } = req.params;
+    const product = await Product.find({ product_name : product_name }).populate('user');
+    return res.send(product);
 }
 
 
@@ -173,5 +201,7 @@ module.exports = {
     findOneOrCreat,
     addChat,
     getChat,
-    getRooms
+    getRooms,
+    deleteFavorites,
+    search
 }
