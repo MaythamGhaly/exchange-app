@@ -35,13 +35,14 @@
 Note that i didn't use any styling library or theme, all from scratch and using pure css modules
 
 | wireframe |
+|-----------|
 | Register(lightmode) | Login(lightmode) | Home(lightmode) |ProductPage(lightmode)| 
 | --------------------| -----------------|-----------------|----------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/Register%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page-1.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page-1.svg) |
 
 | Register(darkmode) | Login(darkmode) | Home(darkmode) |ProductPage(darkmode)| 
 | -------------------| ----------------|----------------|---------------------|
-| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/Register%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
+| ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
 
 
 <br><br>
