@@ -5,9 +5,9 @@ import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/components/customTextForm.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import '../components/customButton.dart';
-import '../components/smallTextField.dart';
-import '../services/rest_api.dart';
+import '../../components/customButton.dart';
+import '../../components/smallTextField.dart';
+import '../../services/rest_api.dart';
 
 class EditProfile extends StatefulWidget {
   var user;

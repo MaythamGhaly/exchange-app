@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/productsPage.dart';
+import 'package:frontend/screens/userScreen.dart/productsPage.dart';
 
-import '../services/rest_api.dart';
+import '../../services/rest_api.dart';
 
 class Favorites extends StatefulWidget {
   Favorites({super.key});

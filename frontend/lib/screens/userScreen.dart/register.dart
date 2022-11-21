@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:frontend/components/customTextForm.dart';
-import 'package:frontend/screens/login.dart';
+import 'package:frontend/screens/userScreen.dart/login.dart';
 import 'package:frontend/services/rest_api.dart';
-import '../components/customButton.dart';
-import '../components/smallTextField.dart';
+import '../../components/customButton.dart';
+import '../../components/smallTextField.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

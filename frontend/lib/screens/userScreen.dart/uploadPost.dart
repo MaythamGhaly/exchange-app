@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-import '../services/rest_api.dart';
+import '../../services/rest_api.dart';
 
 class UploadPost extends StatefulWidget {
   @override
