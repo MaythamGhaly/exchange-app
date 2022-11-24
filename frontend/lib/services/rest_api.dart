@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/adminScreen/adminPage.dart';
-import 'package:frontend/screens/login.dart';
+import 'package:frontend/screens/userScreen.dart/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import '../screens/basePage.dart';
+import '../screens/userScreen.dart/basePage.dart';
 import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/categoryPage.dart';
-import '../services/rest_api.dart';
+import 'package:frontend/screens/userScreen.dart/categoryPage.dart';
+import '../../services/rest_api.dart';
 import 'chatingPage.dart';
-import '../components/customButton.dart';
+import '../../components/customButton.dart';
 
 class ProductPage extends StatefulWidget {
   var product;

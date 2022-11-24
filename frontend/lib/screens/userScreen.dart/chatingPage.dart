@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/customMessageCard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/customMessageReplyCard.dart';
+import '../../components/customMessageReplyCard.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import '../services/rest_api.dart';
+import '../../services/rest_api.dart';
 
 class ChatingPage extends StatefulWidget {
   var userId;

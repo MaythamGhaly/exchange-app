@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/productsPage.dart';
+import 'package:frontend/screens/userScreen.dart/productsPage.dart';
 import 'package:frontend/services/rest_api.dart';
 import 'package:provider/provider.dart';
-import '../../provider/dark_theme_provider.dart';
+import '../../../provider/dark_theme_provider.dart';
 
 class search extends StatefulWidget {
   String product_name;

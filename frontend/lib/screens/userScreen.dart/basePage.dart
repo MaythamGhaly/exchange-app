@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/home.dart';
-import 'package:frontend/screens/profile.dart';
+import 'package:frontend/screens/userScreen.dart/home.dart';
+import 'package:frontend/screens/userScreen.dart/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../provider/dark_theme_provider.dart';
+import '../../provider/dark_theme_provider.dart';
 import 'login.dart';
 import 'mainChatsPage.dart';
 
@@ -84,6 +84,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   const PopupMenuItem<int>(
                     value: 1,
+                    child: Text("Contact Us"),
+                  ),
+                  const PopupMenuItem<int>(
+                    value: 2,
                     child: Text("Logout"),
                   ),
                 ];
@@ -92,6 +96,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 if (value == 0) {
                   print("Switch theme is selected.");
                 } else if (value == 1) {
+                } else if (value == 2) {
                   logout();
                   Navigator.pushAndRemoveUntil(
                     context,

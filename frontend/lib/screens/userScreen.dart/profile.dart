@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/favoritesSection.dart';
-import '../services/rest_api.dart';
-import '../components/customButton.dart';
+import 'package:frontend/screens/userScreen.dart/favoritesSection.dart';
+import '../../services/rest_api.dart';
+import '../../components/customButton.dart';
 import 'uploadPost.dart';
 import 'editProfile.dart';
 

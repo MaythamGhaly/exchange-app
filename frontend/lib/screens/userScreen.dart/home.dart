@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:frontend/screens/Search.dart';
+import 'package:frontend/screens/userScreen.dart/Search.dart';
 import 'categoryPage.dart';
 
 class HomeController extends StatefulWidget {
