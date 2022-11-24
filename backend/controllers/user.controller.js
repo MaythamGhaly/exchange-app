@@ -55,7 +55,7 @@ const addProduct = async (req, res) => {
 // api to get products by category
 const getProductByCategory = async (req, res) => {
     const { category } = req.params;
-    if (category === 'all') {
+    if (category === 'All') {
         const product = await Product.find({ approved: true, deal_done: false }).populate('user');
         return res.send(product)
     }
