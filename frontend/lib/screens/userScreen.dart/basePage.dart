@@ -89,6 +89,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   const PopupMenuItem<int>(
                     value: 2,
+
                     child: Text("Logout"),
                   ),
                 ];
@@ -106,6 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             )),
                   );
                 } else if (value == 2) {
+
                   logout();
                   Navigator.pushAndRemoveUntil(
                     context,
