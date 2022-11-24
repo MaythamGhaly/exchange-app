@@ -409,7 +409,7 @@ class ApiService {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         });
-    showSnackBar(context, "User are banned");
+    showSnackBar(context, "User banned");
     return false;
   }
 
@@ -425,7 +425,7 @@ class ApiService {
           'Authorization': 'Bearer $token',
         });
     if (response.statusCode == 200) {
-      showSnackBar(context, "ban are removed");
+      showSnackBar(context, "Ban removed");
       return true;
     }
     showSnackBar(context, "Remove ban failed");

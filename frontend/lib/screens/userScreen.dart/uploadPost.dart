@@ -22,10 +22,10 @@ class _UploadPostState extends State<UploadPost> {
 
   final _formKey = GlobalKey<FormState>();
   var items = [
-    'food',
-    'medicine',
-    'others',
-    'donate',
+    'Food',
+    'Medicine',
+    'Others',
+    'Donate',
   ];
   String? selectedValue;
 
@@ -178,7 +178,7 @@ class _UploadPostState extends State<UploadPost> {
           CustomButton(
               inputText: 'Upload Post',
               onpressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate() && _image != null) {
                   var data = jsonEncode({
                     "product_name": _productNameController.text,
                     "expiry_date": _expiryDateController.text,
@@ -191,6 +191,7 @@ class _UploadPostState extends State<UploadPost> {
                   _productNameController.clear();
                   _expiryDateController.clear();
                   _image = null;
+                  return;
                 }
                 if (_image == null) {
                   ApiService.showSnackBar(context, "image is required");

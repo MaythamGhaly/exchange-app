@@ -108,7 +108,7 @@ class _EditProfileState extends State<EditProfile> {
                           Expanded(
                             child: SmallTextForm.customText(
                               context,
-                              'first name',
+                              'First name',
                               'enter your first name',
                               _firstNameController,
                             ),
