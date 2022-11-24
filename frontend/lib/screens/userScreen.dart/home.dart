@@ -112,7 +112,7 @@ class _HomeControllerState extends State<HomeController>
               splashBorderRadius: BorderRadius.circular(20),
               automaticIndicatorColorAdjustment: false,
               labelColor: const Color.fromARGB(200, 92, 225, 230),
-              unselectedLabelColor: const Color.fromARGB(255, 111, 8, 143),
+              unselectedLabelColor: Color.fromARGB(255, 153, 14, 196),
               controller: _controller,
               labelPadding: const EdgeInsets.only(left: 5, right: 5),
               tabs: const [
@@ -146,11 +146,12 @@ class _HomeControllerState extends State<HomeController>
             child: TabBarView(
               controller: _controller,
               children: <Widget>[
-                CategoryPage(category: 'all'),
-                CategoryPage(category: 'food'),
-                CategoryPage(category: 'medicine'),
-                CategoryPage(category: 'others'),
-                CategoryPage(category: 'donate'),
+                CategoryPage(category: 'All'),
+                CategoryPage(category: 'Food'),
+                CategoryPage(category: 'Medicine'),
+                CategoryPage(category: 'Others'),
+                CategoryPage(category: 'Donate'),
+
               ],
             ),
           ),

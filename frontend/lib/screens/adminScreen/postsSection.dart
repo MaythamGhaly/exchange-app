@@ -75,27 +75,31 @@ class _postsSectionsState extends State<postsSections> {
                                     padding: const EdgeInsets.all(10),
                                     child: Text('${product['description']}'),
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.all(0),
-                                    child: IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () async {
-                                        await ApiService.deletePost(
-                                            context, product['_id']);
-                                        getPosts();
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(0),
-                                    child: IconButton(
-                                      icon: const Icon(Icons.done),
-                                      onPressed: () async {
-                                        await ApiService.approvePost(
-                                            context, product['_id']);
-                                        getPosts();
-                                      },
-                                    ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        // padding: const EdgeInsets.all(0),
+                                        child: IconButton(
+                                          icon: const Icon(Icons.delete),
+                                          onPressed: () async {
+                                            await ApiService.deletePost(
+                                                context, product['_id']);
+                                            getPosts();
+                                          },
+                                        ),
+                                      ),
+                                      Expanded(
+                                        // padding: const EdgeInsets.all(0),
+                                        child: IconButton(
+                                          icon: const Icon(Icons.done),
+                                          onPressed: () async {
+                                            await ApiService.approvePost(
+                                                context, product['_id']);
+                                            getPosts();
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

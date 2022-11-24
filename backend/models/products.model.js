@@ -21,7 +21,7 @@ const productsSchema = new mongoose.Schema({
     category: {
         type: String,
         required: 'category is required',
-        enum: ['food', 'medicine', 'others', 'donate']
+        enum: ['Food', 'Medicine', 'Others', 'Donate']
     },
     approved: {
         type: Boolean,

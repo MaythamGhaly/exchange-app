@@ -4,6 +4,7 @@ import 'package:frontend/screens/userScreen.dart/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../provider/dark_theme_provider.dart';
+import 'chatingPage.dart';
 import 'login.dart';
 import 'mainChatsPage.dart';
 
@@ -63,7 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     value: 0,
                     child: Row(
                       children: [
-                        const Text('theme'),
+                        const Text('Theme'),
                         Switch(
                           activeColor: const Color.fromARGB(200, 92, 225, 230),
                           activeTrackColor:
@@ -84,6 +85,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   const PopupMenuItem<int>(
                     value: 1,
+                    child: Text("Contact Us"),
+                  ),
+                  const PopupMenuItem<int>(
+                    value: 2,
+
                     child: Text("Logout"),
                   ),
                 ];
@@ -92,6 +98,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 if (value == 0) {
                   print("Switch theme is selected.");
                 } else if (value == 1) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChatingPage(
+                              userId: "6377dc393992a58e5c665301",
+                              user_name: "Admin",
+                            )),
+                  );
+                } else if (value == 2) {
+
                   logout();
                   Navigator.pushAndRemoveUntil(
                     context,
