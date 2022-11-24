@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../provider/dark_theme_provider.dart';
-import '../login.dart';
+import '../userScreen.dart/login.dart';
+import '../userScreen.dart/mainChatsPage.dart';
 
 class adminPage extends StatefulWidget {
   const adminPage({super.key});
@@ -26,7 +27,7 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller = TabController(length: 3, vsync: this);
+    _controller = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -121,6 +122,10 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
               icon: Icon(Icons.block),
               text: 'Banned Users',
             ),
+            Tab(
+              icon: Icon(Icons.chat),
+              text: 'Chats',
+            ),
           ],
         ),
       ),
@@ -130,6 +135,7 @@ class _adminPageState extends State<adminPage> with TickerProviderStateMixin {
           userSection(),
           postsSections(),
           bannedSection(),
+          SingleChildScrollView(child: CustomCard()),
         ],
       ),
     );

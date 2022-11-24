@@ -81,7 +81,8 @@ class _FavoritesState extends State<Favorites> {
                                       right: 0,
                                       child: IconButton(
                                         iconSize: 25,
-                                        icon: const Icon(Icons.favorite),
+                                        icon: const Icon(Icons.delete),
+
                                         color: const Color.fromARGB(
                                             255, 85, 20, 170),
                                         onPressed: () async {
