@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/provider/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/userScreen.dart/login.dart';
+import 'screens/userScreen/login.dart';
 import 'consts/theme_data.dart';
 
 void main() {
