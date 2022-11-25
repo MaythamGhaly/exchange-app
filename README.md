@@ -51,6 +51,10 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 | -------------------| ----------------|----------------|---------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20page.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/chats.svg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20page.svg) |
 
+| Live Chat |
+|-----------|
+|![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.gif)|
+
 
 <br><br>
 
