@@ -53,7 +53,7 @@ Note that i didn't use any styling library or theme, all from scratch and using 
 
 | Live Chat |
 |-----------|
-|![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.gif)|
+|<img src="https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.svg" width="40" height="40" />|
 
 
 <br><br>
