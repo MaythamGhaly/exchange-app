@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/userScreen.dart/home.dart';
-import 'package:frontend/screens/userScreen.dart/profile.dart';
+import 'package:frontend/screens/userScreen/home.dart';
+import 'package:frontend/screens/userScreen/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../provider/dark_theme_provider.dart';
@@ -89,7 +89,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                   const PopupMenuItem<int>(
                     value: 2,
-
                     child: Text("Logout"),
                   ),
                 ];
@@ -107,7 +106,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             )),
                   );
                 } else if (value == 2) {
-
                   logout();
                   Navigator.pushAndRemoveUntil(
                     context,

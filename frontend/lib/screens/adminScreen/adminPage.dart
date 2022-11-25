@@ -6,10 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../provider/dark_theme_provider.dart';
-import '../userScreen.dart/login.dart';
-import '../userScreen.dart/mainChatsPage.dart';
-
-
+import '../userScreen/login.dart';
+import '../userScreen/mainChatsPage.dart';
 
 class adminPage extends StatefulWidget {
   const adminPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:frontend/screens/userScreen.dart/Search.dart';
+import 'package:frontend/screens/userScreen/Search.dart';
 import 'categoryPage.dart';
 
 class HomeController extends StatefulWidget {
@@ -151,7 +151,6 @@ class _HomeControllerState extends State<HomeController>
                 CategoryPage(category: 'Medicine'),
                 CategoryPage(category: 'Others'),
                 CategoryPage(category: 'Donate'),
-
               ],
             ),
           ),
