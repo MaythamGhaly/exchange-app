@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/userScreen.dart/favoritesSection.dart';
+import 'package:frontend/screens/userScreen/favoritesSection.dart';
 import '../../services/rest_api.dart';
 import '../../components/customButton.dart';
 import 'uploadPost.dart';
