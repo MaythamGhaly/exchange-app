@@ -80,6 +80,10 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -------------------| ----------------|----------------|---------------------|
 | ![Register (lightmode)](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/home%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/login%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/main%20chat%20light.jpg) | ![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/product%20light.jpg) |
 
+| Admin Screen |
+|-----------|
+|![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/admin.jpg)|
+
 | Live Chat |
 |-----------|
 |![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.gif)|
