@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/userScreen.dart/productsPage.dart';
+import 'package:frontend/screens/userScreen/productsPage.dart';
 
 import '../../services/rest_api.dart';
 
@@ -82,7 +82,6 @@ class _FavoritesState extends State<Favorites> {
                                       child: IconButton(
                                         iconSize: 25,
                                         icon: const Icon(Icons.delete),
-
                                         color: const Color.fromARGB(
                                             255, 85, 20, 170),
                                         onPressed: () async {

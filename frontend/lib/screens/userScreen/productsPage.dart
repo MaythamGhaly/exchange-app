@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/userScreen.dart/categoryPage.dart';
+import 'package:frontend/screens/userScreen/categoryPage.dart';
 import '../../services/rest_api.dart';
 import 'chatingPage.dart';
 import '../../components/customButton.dart';
