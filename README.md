@@ -82,7 +82,9 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Admin Screen |
 |-----------|
-|![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/admin.jpg)|
+
+|<img width=200 src="https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/admin.jpg" />|
+
 
 | Live Chat |
 |-----------|
