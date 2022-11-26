@@ -84,9 +84,6 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 |-----------|
 |![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.gif)|
 
-| Live Chat |
-|-----------|
-|![Home/Search](https://github.com/MaythamGhaly/exchange-app/blob/frontend/readme/images/live%20chats.gif)|
 
 <br><br>
 <img src="./readme/title6.svg"/>
